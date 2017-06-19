@@ -69,6 +69,7 @@ artifacts/
 *.vspscc
 *.vssscc
 .builds
+.DS_Store
 *.pidb
 *.svclog
 *.scc
