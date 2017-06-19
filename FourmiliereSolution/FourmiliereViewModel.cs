@@ -99,9 +99,28 @@ namespace FourmiliereSolution
             }
         }
 
+        internal void loseLife()
+        {
+            ObservableCollection<Fourmi> fourmisToDeleteList = new ObservableCollection<Fourmi>() ;
+            foreach (var fourmi in FourmisList)
+            {
+                if (fourmi.LoseHealth())
+                    fourmisToDeleteList.Add(fourmi);
+            }
+            foreach (var fourmi in fourmisToDeleteList)
+            {
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    FourmisList.Remove(fourmi);
+                });
+            }
+            OnPropertyChanged("FourmisList");
+        }
+
 
         internal void tourSuivant()
         {
+            loseLife();
             stop();
             move();
         }
@@ -113,6 +132,7 @@ namespace FourmiliereSolution
             while(Runnin)
             {
                 Thread.Sleep(VitesseExec);
+                loseLife();
                 move();
             }
         }

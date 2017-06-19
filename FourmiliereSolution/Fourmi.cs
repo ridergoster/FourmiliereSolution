@@ -10,6 +10,7 @@ namespace FourmiliereSolution
         public string Nom { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public int Health { get; set; }
 
         public ObservableCollection<Etape> EtapesList { get; set; }
 
@@ -18,6 +19,7 @@ namespace FourmiliereSolution
             Nom = _Nom;
             X = Hazard.Next(_X);
             Y = Hazard.Next(_Y);
+            Health = Hazard.Next(30);
 
             EtapesList = new ObservableCollection<Etape>();
             int nbX = Hazard.Next(10);
@@ -38,6 +40,11 @@ namespace FourmiliereSolution
             int newY = Y + Hazard.Next(3) - 1;
             if (newX >= 0 && newX < dimX) X = newX;
             if (newY >= 0 && newY < dimY) Y = newY;        
+        }
+
+        public bool LoseHealth()
+        {
+            return --Health <= 0;
         }
     }
 }
