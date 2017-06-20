@@ -59,6 +59,12 @@
       <DependentUpon>AproposWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Etape.cs" />
+    <Compile Include="Model\Case.cs" />
+    <Compile Include="Model\Fourmi.cs" />
+    <Compile Include="Model\Fourmiliere.cs" />
+    <Compile Include="Model\Jeux.cs" />
+    <Compile Include="Model\Nourriture.cs" />
+    <Compile Include="Model\Terrain.cs" />
     <Compile Include="OpenAbout.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Page Include="AproposWindow.xaml">
