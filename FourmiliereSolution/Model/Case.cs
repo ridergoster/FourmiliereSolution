@@ -77,24 +77,24 @@ namespace FourmiliereSolution.Model
             PheromoneNourriture--;
         }
 
-        public List<Case> CasesAdjacentes(Case refCase)
+        public List<Case> CasesAdjacentes()
         {
             List<Case> casesAdjacentes = new List<Case>();
-            if (refCase.CordX > 0)
+            if (this.CordX > 0)
             {
-                casesAdjacentes.Add(RefTerrain.Cases[refCase.CordX - 1, refCase.CordY]);
+                casesAdjacentes.Add(RefTerrain.Cases[this.CordX - 1, this.CordY]);
             }
-            if (refCase.CordX < (RefTerrain.Cases.GetLength(0) - 1))
+            if (this.CordX < (RefTerrain.Cases.GetLength(0) - 1))
             {
-                casesAdjacentes.Add(RefTerrain.Cases[refCase.CordX + 1, refCase.CordY]);
+                casesAdjacentes.Add(RefTerrain.Cases[this.CordX + 1, this.CordY]);
             }
-            if (refCase.CordY > 0)
+            if (this.CordY > 0)
             {
-                casesAdjacentes.Add(RefTerrain.Cases[refCase.CordX, refCase.CordY - 1]);
+                casesAdjacentes.Add(RefTerrain.Cases[this.CordX, this.CordY - 1]);
             }
-            if (refCase.CordY < (RefTerrain.Cases.GetLength(1) - 1))
+            if (this.CordY < (RefTerrain.Cases.GetLength(1) - 1))
             {
-                casesAdjacentes.Add(RefTerrain.Cases[refCase.CordX, refCase.CordY + 1]);
+                casesAdjacentes.Add(RefTerrain.Cases[this.CordX, this.CordY + 1]);
             }
 
             return casesAdjacentes;
