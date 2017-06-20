@@ -8,9 +8,10 @@ namespace FourmiliereSolution.Model
 {
     class StrategieRetourMaison : StrategieFourmi
     {
-        public bool Manger { get; set;  } = true;
+        public bool Manger { get; set; } = true;
+        public bool Trigger { get; set; } = false;
 
-        public void update()
+        public Case update(Case refCase)
         {
             throw new NotImplementedException();
         }

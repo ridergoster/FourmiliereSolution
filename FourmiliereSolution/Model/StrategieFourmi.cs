@@ -9,6 +9,7 @@ namespace FourmiliereSolution.Model
     interface StrategieFourmi
     {
         bool Manger { get; set; }
-        void update();
+        bool Trigger { get; set; }
+        Case update(Case refCase);
     }
 }

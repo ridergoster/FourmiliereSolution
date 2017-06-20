@@ -28,7 +28,24 @@ namespace FourmiliereSolution.Model
         // le plus de phéromone maison ou nourriture
         public void update()
         {
-            StrategieFourmi.update();
+            Case newCase = StrategieFourmi.update(RefCase);
+            if (StrategieFourmi.Trigger)
+            {
+                if (StrategieFourmi.Manger)
+                {
+                    StrategieFourmi = new StrategieRetourMaison();
+                } 
+                else
+                {
+                    StrategieFourmi = new StrategieRechercheNourriture();
+                }
+            }
+            else
+            {
+                RefCase.SupprimerFourmi(this);
+                RefCase = newCase;
+                RefCase.AjouterFourmi(this);
+            }
         }
 
         public bool PorteNourriture()

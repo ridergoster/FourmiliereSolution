@@ -15,9 +15,11 @@ namespace FourmiliereSolution.Model
         // CONTIENT UNE REF SUR LE TERRAIN
         private Terrain RefTerrain { get; set; }
         // CONTIENT UN NB DE PHEROMONE "MAISON"
-        private int PheromoneMaison { get; set; } = 0;
+        private int pheromoneMaison;
+        public int PheromoneMaison { get => pheromoneMaison; set => pheromoneMaison = value; }
         // CONTIENT UN NB DE PHEROMONE "NOURRITURE"
-        private int PheromoneNourriture { get; set; } = 0;
+        private int pheromoneNourriture;
+        public int PheromoneNourriture { get => pheromoneNourriture; set => pheromoneNourriture = value; }
         // CONTIENT UN ARRAY DE FOURMI SUR LA CASE
         private List<Fourmi> Fourmis { get; set; } = new List<Fourmi>();
         // CONTIENT UNE NOURRITURE SUR LA CASE ==> class herit (caseNourriture)?
