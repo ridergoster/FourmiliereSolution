@@ -9,12 +9,15 @@ namespace FourmiliereSolution.Model
     class Fourmi
     {
         static Random Hasard = new Random();
+
         // CONTIENT REFERENCE SUR LA CASE
         private Case RefCase { get; set; }
+
         // CONTIENT UN NB VIE
-        private int Vie { get; set; } = Hasard.Next(10, 100);
-        // CONTIENT BOOL MANGER
-        private bool Mange { get; set; } = false;
+        private int Vie { get; set; } = Hasard.Next(50, 100);
+
+        // CONTIENT STRATEGIE 
+        private StrategieFourmi StrategieFourmi { get; set; } = new StrategieRechercheNourriture();
 
         public Fourmi(Case _RefCase)
         {
@@ -23,6 +26,14 @@ namespace FourmiliereSolution.Model
 
         // FONCTION UPDATE => via stratégie cherche selon les case adjacentes celle avec 
         // le plus de phéromone maison ou nourriture
-        public void UpdateFourmi() { }
+        public void update()
+        {
+            StrategieFourmi.update();
+        }
+
+        public bool PorteNourriture()
+        {
+            return StrategieFourmi.Manger;
+        }
     }
 }
