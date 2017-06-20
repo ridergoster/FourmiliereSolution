@@ -8,10 +8,21 @@ namespace FourmiliereSolution.Model
 {
     class Jeux
     {
+        // CONTIENT UN TERRAIN
+        private Terrain ZoneTerrain { get; set; }
+        // CONTIENT DES PARAMS MODIFIABLES
+        private KeyValuePair<string, string> Parametres;
+
+        public Jeux(Terrain _ZoneTerrain, KeyValuePair<string, string> _Parametres)
+        {
+            ZoneTerrain = _ZoneTerrain;
+            Parametres = _Parametres;
+        }
 
         // LOAD GAME
+        public void ChargerJeu() { }
+      
         // SAVE GAME
-        // CONTIENT UN TERRAIN
-        // CONTIENT DES PARAMS MODIFIABLES
+        public void SauvegarderJeu() { }
     }
 }
