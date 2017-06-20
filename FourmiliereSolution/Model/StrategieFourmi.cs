@@ -8,7 +8,7 @@ namespace FourmiliereSolution.Model
 {
     interface StrategieFourmi
     {
-        bool Manger { get; }
+        bool Manger { get; set; }
         void update();
     }
 }

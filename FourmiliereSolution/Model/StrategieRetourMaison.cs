@@ -8,7 +8,7 @@ namespace FourmiliereSolution.Model
 {
     class StrategieRetourMaison : StrategieFourmi
     {
-        public bool Manger { get; } = true;
+        public bool Manger { get; set;  } = true;
 
         public void update()
         {
