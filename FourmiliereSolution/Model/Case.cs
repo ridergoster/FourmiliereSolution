@@ -9,6 +9,9 @@ namespace FourmiliereSolution.Model
 {
     class Case
     {
+        private int CordX { get; set; }
+        private int CordY { get; set; }
+
         // CONTIENT UNE REF SUR LE TERRAIN
         private Terrain RefTerrain { get; set; }
         // CONTIENT UN NB DE PHEROMONE "MAISON"
@@ -20,9 +23,11 @@ namespace FourmiliereSolution.Model
         // CONTIENT UNE NOURRITURE SUR LA CASE ==> class herit (caseNourriture)?
         // CONTIENT UNE FOURMILIERE SUR LA CASE ==> class herit (caseFourmiliere) ?
 
-        public Case(Terrain _RefTerrain)
+        public Case(Terrain _RefTerrain, int _cordX, int _cordY)
         {
             RefTerrain = _RefTerrain;
+            CordX = _cordX;
+            CordY = _cordY;
         }
 
         // FONCTION : CONTIENT NOURRITURE ?
@@ -70,6 +75,29 @@ namespace FourmiliereSolution.Model
         public void SupprimerPheromoneNourriture()
         {
             PheromoneNourriture--;
+        }
+
+        public List<Case> CasesAdjacentes(Case refCase)
+        {
+            List<Case> casesAdjacentes = new List<Case>();
+            if (refCase.CordX > 0)
+            {
+                casesAdjacentes.Add(RefTerrain.Cases[refCase.CordX - 1, refCase.CordY]);
+            }
+            if (refCase.CordX < (RefTerrain.Cases.GetLength(0) - 1))
+            {
+                casesAdjacentes.Add(RefTerrain.Cases[refCase.CordX + 1, refCase.CordY]);
+            }
+            if (refCase.CordY > 0)
+            {
+                casesAdjacentes.Add(RefTerrain.Cases[refCase.CordX, refCase.CordY - 1]);
+            }
+            if (refCase.CordY < (RefTerrain.Cases.GetLength(1) - 1))
+            {
+                casesAdjacentes.Add(RefTerrain.Cases[refCase.CordX, refCase.CordY + 1]);
+            }
+
+            return casesAdjacentes;
         }
 
         // FONCTION : SET / GET NOURRITURE
