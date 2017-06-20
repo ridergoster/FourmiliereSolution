@@ -11,12 +11,13 @@ namespace FourmiliereSolution.Model
         // CONTIENT REFERENCE SUR LA CASE
         private Case RefCase { get; set; }
         // CONTIENT UN NBNOURRITURE RECOLTE
-        private int NombreNourritures { get; set; }
+        private int NombreNourritures { get; set; } = 0;
+        // CONTIENT UN NBTOUR
+        private int NombreTours { get; set; } = 0;
 
-        public Fourmiliere(Case _RefCase, int _NombreNourritures)
+        public Fourmiliere(Case _RefCase)
         {
             RefCase = _RefCase;
-            NombreNourritures = _NombreNourritures;
         }
 
         // FONCTION: ADD / SUPP NOURRITURE && GET / SET NBNOURRITURE
@@ -26,10 +27,13 @@ namespace FourmiliereSolution.Model
 
 
         // FONCTION UPDATE => CONSOMME 1 NOURRITURE TOUT LES X tour puis appel genere fourmi
-        public void Update()
+        public void UpdateFourmilliere()
         {
-            if (NombreNourritures > 0)
+            NombreTours += (NombreTours + 1) % 20;
+
+            if (NombreTours % 20 == 0)
             {
+                NombreTours = 0;
                 NombreNourritures--;
             }
         }

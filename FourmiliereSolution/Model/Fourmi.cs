@@ -8,20 +8,17 @@ namespace FourmiliereSolution.Model
 {
     class Fourmi
     {
+        static Random Hasard = new Random();
         // CONTIENT REFERENCE SUR LA CASE
         private Case RefCase { get; set; }
         // CONTIENT UN NB VIE
-        private int Vie { get; set; }
+        private int Vie { get; set; } = Hasard.Next(10, 100);
         // CONTIENT BOOL MANGER
-        private bool Mange { get; set; }
+        private bool Mange { get; set; } = false;
 
-        public Fourmi(Case _RefCase, bool _Mange)
+        public Fourmi(Case _RefCase)
         {
-            Random Hasard = new Random();
-
             RefCase = _RefCase;
-            this.Vie = Hasard.Next(10, 100);
-            Mange = _Mange;
         }
 
         // FONCTION UPDATE => via stratégie cherche selon les case adjacentes celle avec 

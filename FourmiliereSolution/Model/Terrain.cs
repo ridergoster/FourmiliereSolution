@@ -11,7 +11,7 @@ namespace FourmiliereSolution.Model
         // CONTIENT UN ARRAY 2D DE CASE DE X SUR Y TAILLE
         public Case[,] Cases;
 
-        public Terrain(Case[,] _Cases = new Case[20, 20])
+        public Terrain(Case[,] _Cases)
         {
             Cases = _Cases;
         }
