@@ -21,13 +21,13 @@ namespace FourmiliereSolution.Model
         }
 
         // FONCTION: ADD / SUPP NOURRITURE && GET / SET NBNOURRITURE
-        
+
 
         // FONCTION GENERE FOURMI => GENERE UNE FOURMI SUR LA CASE AVEC PLUS OU MOINS DE CHANCE SELON LE NB NOURRITURE
 
 
-        // FONCTION UPDATE => CONSOMME 1 NOURRITURE TOUT LES X tour puis appel genere fourmi
-        public void UpdateFourmilliere()
+        // FONCTION MiseAjour => CONSOMME 1 NOURRITURE TOUT LES X tour puis appel genere fourmi
+        public void MiseAjour()
         {
             NombreTours += (NombreTours + 1) % 20;
 

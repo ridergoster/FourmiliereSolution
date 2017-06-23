@@ -24,11 +24,11 @@ namespace FourmiliereSolution.Model
             RefCase = _RefCase;
         }
 
-        // FONCTION UPDATE => via stratégie cherche selon les case adjacentes celle avec 
+        // FONCTION MiseAjour => via stratégie cherche selon les case adjacentes celle avec 
         // le plus de phéromone maison ou nourriture
-        public void update()
+        public void MiseAjour()
         {
-            Case newCase = StrategieFourmi.update(RefCase);
+            Case newCase = StrategieFourmi.MiseAjour(RefCase);
             if (StrategieFourmi.Trigger)
             {
                 if (StrategieFourmi.Manger)
@@ -42,9 +42,9 @@ namespace FourmiliereSolution.Model
             }
             else
             {
-                RefCase.SupprimerFourmi(this);
+                RefCase.AjouterASupprimerFourmi(this);
                 RefCase = newCase;
-                RefCase.AjouterFourmi(this);
+                RefCase.AjouterEnAjoutFourmi(this);
             }
         }
 

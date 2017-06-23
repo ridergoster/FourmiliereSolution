@@ -16,10 +16,18 @@ namespace FourmiliereSolution.Model
             Cases = _Cases;
         }
 
-        // FONCTION UPDATE
-        public void UpdateTerrain()
+        // FONCTION MiseAjour
+        public void MiseAjour()
         {
-
+            foreach(Case refCase in Cases)
+            {
+                refCase.MiseAjour();
+            }
+            foreach(Case refCase in Cases)
+            {
+                refCase.AjouterFourmi();
+                refCase.SupprimerFourmi();
+            }
         }
 
         // FONCTION DRAW

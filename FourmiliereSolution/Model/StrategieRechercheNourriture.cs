@@ -10,6 +10,8 @@ namespace FourmiliereSolution.Model
     {
         public bool Manger { get; set;  } = false;
         public bool Trigger { get; set; } = false;
+
+        static Random Hasard = new Random();
         private Case CaseNourritureOptimal(List<Case> list)
         {
             int i = 0;
@@ -17,7 +19,7 @@ namespace FourmiliereSolution.Model
             int nbPheromoneNourritureMax = 0;
             foreach(Case caseItem in list)
             {
-                if (caseItem.ContientNourriture())
+                if (caseItem.ContientNourriture == true)
                 {
                     optimal = i;
                     break;
@@ -29,11 +31,15 @@ namespace FourmiliereSolution.Model
                 }
                 i++;
             }
+            if ((i + 1) == list.Count && nbPheromoneNourritureMax == 0)
+            {
+                return list[Hasard.Next(0, (list.Count - 1))];
+            }
             return list[optimal];
         } 
-        public Case update(Case refCase)
+        public Case MiseAjour(Case refCase)
         {
-            if(refCase.ContientNourriture())
+            if(refCase.ContientNourriture)
             {
                 // enlever nourrituer a la case et trigger a true pour changer de strategie
                 Trigger = true;

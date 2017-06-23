@@ -9,21 +9,41 @@ namespace FourmiliereSolution.Model
 {
     class Case
     {
-        private int CordX { get; set; }
-        private int CordY { get; set; }
+        // CONTIENT DES COORDONEES
+        private int cordX;
+        public int CordX { get => cordX; set => cordX = value; }
+
+        private int cordY;
+        public int CordY { get => cordY; set => cordY = value; }
 
         // CONTIENT UNE REF SUR LE TERRAIN
-        private Terrain RefTerrain { get; set; }
+        private Terrain refTerrain;
+        public Terrain RefTerrain{ get => refTerrain; set => refTerrain = value; }
+
         // CONTIENT UN NB DE PHEROMONE "MAISON"
         private int pheromoneMaison;
         public int PheromoneMaison { get => pheromoneMaison; set => pheromoneMaison = value; }
+
         // CONTIENT UN NB DE PHEROMONE "NOURRITURE"
         private int pheromoneNourriture;
         public int PheromoneNourriture { get => pheromoneNourriture; set => pheromoneNourriture = value; }
+
         // CONTIENT UN ARRAY DE FOURMI SUR LA CASE
-        private List<Fourmi> Fourmis { get; set; } = new List<Fourmi>();
-        // CONTIENT UNE NOURRITURE SUR LA CASE ==> class herit (caseNourriture)?
-        // CONTIENT UNE FOURMILIERE SUR LA CASE ==> class herit (caseFourmiliere) ?
+        private List<Fourmi> fourmis;
+        public List<Fourmi> Fourmis { get => fourmis; set => fourmis = value; }
+
+        private List<Fourmi> fourmisEnAjout;
+        public List<Fourmi> FourmisEnAjout { get => fourmisEnAjout; set => fourmisEnAjout = value; }
+
+        private List<Fourmi> fourmisASupprimer;
+        public List<Fourmi> FourmisASupprimer { get => fourmisASupprimer; set => fourmisASupprimer = value; }
+
+
+        private bool contientNourriture = false;
+        public bool ContientNourriture { get => contientNourriture; set => contientNourriture = value; }
+
+        private bool contientFourmiliere = false;
+        public bool ContientFourmiliere { get => contientFourmiliere; set => contientFourmiliere = value; }
 
         public Case(Terrain _RefTerrain, int _cordX, int _cordY)
         {
@@ -32,30 +52,26 @@ namespace FourmiliereSolution.Model
             CordY = _cordY;
         }
 
-        // FONCTION : CONTIENT NOURRITURE ?
-        public bool ContientNourriture()
+        public void AjouterASupprimerFourmi(Fourmi NouvelleFourmi)
         {
-            return false;
+            FourmisASupprimer.Add(NouvelleFourmi);
+        }
+        public void AjouterEnAjoutFourmi(Fourmi NouvelleFourmi)
+        {
+            FourmisEnAjout.Add(NouvelleFourmi);
         }
 
-        // FONCTION : CONTIENT FOURMILIERE ?
-        public bool ContientFourmilliere()
+        public void AjouterFourmi()
         {
-            return false;
+            fourmis.AddRange(fourmisEnAjout);
+            fourmisEnAjout.Clear();
         }
 
-        // FONCTION : AJOUTER / SUPP FOURMI && SET / GET FOURMILIST
-        public void AjouterFourmi(Fourmi NouvelleFourmi)
+        public void SupprimerFourmi()
         {
-            Fourmis.Add(NouvelleFourmi);
-        }
 
-        public void SupprimerFourmi(Fourmi FourmiASupprimer)
-        {
-            if (Fourmis.Count > 0 && Fourmis.Contains(FourmiASupprimer))
-            {
-                Fourmis.Remove(FourmiASupprimer);
-            }
+            Fourmis.RemoveAll(fourmi => FourmisASupprimer.Contains(fourmi));
+            FourmisASupprimer.Clear();
         }
 
         // FONCTION : AJOUTER / SUPP PHEROMONE MAISON NOURRITURE && SET / GET
@@ -102,20 +118,19 @@ namespace FourmiliereSolution.Model
             return casesAdjacentes;
         }
 
-        // FONCTION : SET / GET NOURRITURE
-        // FONCTION : SET / GET FOURMILIERE ==> herit ?
-
         // FONCTION UPDATE => 
-        //      1. lance le update pour toute les fourmi pour les faire bouger
-        //      2. lance le update pour bouffe / fourmilière si class herit
-        //      3. lance fonction draw ? ou depuis le jeux ?
-        public void UpdateCase()
+        // lance le update pour les fourmis standard
+        public virtual void MiseAjour()
         {
-
+            foreach(Fourmi fourmi in Fourmis)
+            {
+                fourmi.MiseAjour();
+            }
         }
 
         // FONCTION DRAW CASE 
-        public void DessinerCase()
+        // DESSINE FOURMI SI CONTIENT FOURMI
+        public virtual void draw()
         {
 
         }

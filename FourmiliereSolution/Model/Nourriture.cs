@@ -25,8 +25,8 @@ namespace FourmiliereSolution.Model
             Poids--;
         }
 
-        // FONCTION UPDATE => si poids 0: supprime de la case
-        public void UpdateNourriture()
+        // FONCTION MiseAjour => si poids 0: supprime de la case
+        public void MiseAjour()
         {
             if (Poids == 0)
             {

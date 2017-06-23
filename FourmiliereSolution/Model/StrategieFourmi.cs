@@ -10,6 +10,6 @@ namespace FourmiliereSolution.Model
     {
         bool Manger { get; set; }
         bool Trigger { get; set; }
-        Case update(Case refCase);
+        Case MiseAjour(Case refCase);
     }
 }

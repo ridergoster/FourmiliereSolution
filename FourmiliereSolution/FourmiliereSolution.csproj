@@ -60,10 +60,15 @@
     </Compile>
     <Compile Include="Etape.cs" />
     <Compile Include="Model\Case.cs" />
+    <Compile Include="Model\CaseFourmiliere.cs" />
+    <Compile Include="Model\CaseNourriture.cs" />
     <Compile Include="Model\Fourmi.cs" />
     <Compile Include="Model\Fourmiliere.cs" />
     <Compile Include="Model\Jeux.cs" />
     <Compile Include="Model\Nourriture.cs" />
+    <Compile Include="Model\StrategieFourmi.cs" />
+    <Compile Include="Model\StrategieRechercheNourriture.cs" />
+    <Compile Include="Model\StrategieRetourMaison.cs" />
     <Compile Include="Model\Terrain.cs" />
     <Compile Include="OpenAbout.cs" />
     <Compile Include="ViewModelBase.cs" />
