@@ -20,9 +20,14 @@ namespace FourmiliereSolution.Model
         }
 
         // FONCTION MANGER => enlève 1 au poids
-        public void Manger()
+        public bool Manger()
         {
-            Poids--;
+            if (Poids > 0)
+            {
+                Poids--;
+                return true;
+            }
+            return false;
         }
 
         // FONCTION MiseAjour => si poids 0: supprime de la case

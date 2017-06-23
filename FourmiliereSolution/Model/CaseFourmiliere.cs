@@ -20,6 +20,7 @@ namespace FourmiliereSolution.Model
         public override void MiseAjour()
         {
             base.MiseAjour();
+            Fourmiliere.MiseAjour();
         }
 
         // dessine une fourmiliere
