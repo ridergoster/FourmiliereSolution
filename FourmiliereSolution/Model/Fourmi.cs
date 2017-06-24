@@ -26,21 +26,26 @@ namespace FourmiliereSolution.Model
         // le plus de phéromone maison ou nourriture
         public void MiseAjour()
         {
-            CaseAbstrait newCase = StrategieFourmi.MiseAjour(this);
             Vie--;
 
-            if (Vie == 0)
+            if (Vie <= 0)
             {
                 RefCase.AjouterASupprimerFourmi(this);
                 RefCase = null;
             }
-            else if (newCase != RefCase)
+            else
             {
-                RefCase.AjouterASupprimerFourmi(this);
-                OldCase = RefCase;
-                RefCase = newCase;
-                RefCase.AjouterEnAjoutFourmi(this);
+                CaseAbstrait newCase = StrategieFourmi.MiseAjour(this);
+
+                if (newCase != RefCase)
+                {
+                    RefCase.AjouterASupprimerFourmi(this);
+                    OldCase = RefCase;
+                    RefCase = newCase;
+                    RefCase.AjouterEnAjoutFourmi(this);
+                }
             }
+            
         }
     }
 }

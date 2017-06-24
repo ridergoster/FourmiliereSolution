@@ -10,6 +10,7 @@ namespace FourmiliereSolution.Model
     {
         // CONTIENT UN ARRAY 2D DE CASE DE X SUR Y TAILLE
         public CaseAbstrait[,] Cases { get; set; }
+        public List<CaseAbstrait> CasesNourritureTrigger { get; set; } = new List<CaseAbstrait>();
 
         public Terrain(int number)
         {
@@ -29,6 +30,15 @@ namespace FourmiliereSolution.Model
             foreach(CaseAbstrait refCase in Cases)
             {
                 refCase.MiseAjour(); // mettre à jour la case
+            }
+
+            if(CasesNourritureTrigger.Count > 0)
+            {
+                foreach(CaseAbstrait caseReset in CasesNourritureTrigger)
+                {
+                    Cases[caseReset.CordX, caseReset.CordY] = caseReset;
+                }
+                CasesNourritureTrigger.Clear();
             }
             foreach(CaseAbstrait refCase in Cases)
             {

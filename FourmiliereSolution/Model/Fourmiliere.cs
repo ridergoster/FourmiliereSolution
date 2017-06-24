@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    class Fourmiliere
+    public class Fourmiliere
     {
         // CONTIENT REFERENCE SUR LA CASE
         private CaseAbstrait RefCase { get; set; }

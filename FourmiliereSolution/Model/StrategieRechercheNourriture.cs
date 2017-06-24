@@ -45,7 +45,7 @@ namespace FourmiliereSolution.Model
             {
                 fourmi.RefCase.AjouterPheromoneMaison(fourmi.Vie);
                 List<CaseAbstrait> list = fourmi.RefCase.CasesAdjacentes();
-                list.Remove(fourmi.OldCase);
+                if (!(fourmi.RefCase is CaseFourmiliere)) list.Remove(fourmi.OldCase);
                 CaseAbstrait caseOptimal = CaseNourritureOptimal(list);
                 return caseOptimal;
             }

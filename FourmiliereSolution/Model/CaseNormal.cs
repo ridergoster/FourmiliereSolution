@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    class CaseNormal: CaseAbstrait
+    public class CaseNormal: CaseAbstrait
     {
         public CaseNormal(Terrain _RefTerrain, int _cordX, int _cordY) : base(_RefTerrain, _cordX, _cordY)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    class Nourriture
+    public class Nourriture
     {
         // CONTIENT REFERENCE SUR LA CASE
         private CaseAbstrait RefCase { get; set; }
@@ -20,14 +20,14 @@ namespace FourmiliereSolution.Model
         }
 
         // FONCTION MANGER => enlève 1 au poids
-        public bool Manger()
+        public void Manger()
         {
-            if (Poids > 0)
-            {
-                Poids--;
-                return true;
-            }
-            return false;
+            Poids--;
         }
-    }
+
+        public bool EstVide()
+        {
+            return Poids <= 0;
+        }
+     }
 }

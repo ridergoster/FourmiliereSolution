@@ -115,5 +115,22 @@ namespace FourmiliereSolution.Model
                 fourmi.MiseAjour();
             }
         }
+
+        public CaseNormal AdapteurNormal()
+        {
+            CaseNormal CaseNormal = new CaseNormal(this.RefTerrain, this.CordX, this.CordY);
+            CaseNormal.FacteurPheromoneMaison = this.FacteurPheromoneMaison;
+            CaseNormal.FacteurPheromoneNourriture = this.FacteurPheromoneNourriture;
+            CaseNormal.PheromoneMaison = this.PheromoneMaison;
+            CaseNormal.PheromoneNourriture = this.PheromoneNourriture;
+            CaseNormal.Fourmis = this.Fourmis;
+            CaseNormal.FourmisASupprimer = this.FourmisASupprimer;
+            CaseNormal.FourmisEnAjout = this.FourmisEnAjout;
+            foreach (Fourmi fourmi in CaseNormal.Fourmis) fourmi.RefCase = CaseNormal;
+            foreach (Fourmi fourmi in CaseNormal.FourmisEnAjout) fourmi.RefCase = CaseNormal;
+            CaseNormal.nbTours = this.nbTours;
+            return CaseNormal;
+        }
+
     }
 }

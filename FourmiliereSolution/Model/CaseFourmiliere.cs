@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    class CaseFourmiliere : CaseAbstrait
+    public class CaseFourmiliere : CaseAbstrait
     {
         public Fourmiliere Fourmiliere { get; set; }
 

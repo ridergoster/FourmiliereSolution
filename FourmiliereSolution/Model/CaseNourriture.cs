@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    class CaseNourriture : CaseAbstrait
+    public class CaseNourriture : CaseAbstrait
     {
         public Nourriture Nourriture { get; set; }
 
@@ -22,19 +22,13 @@ namespace FourmiliereSolution.Model
             {
                 if (fourmi.StrategieFourmi is StrategieRechercheNourriture)
                 {
+                    if(Nourriture.EstVide()) break;
+                    Nourriture.Manger();
                     fourmi.StrategieFourmi = new StrategieRetourMaison();
-                    /**
-                    if (Nourriture.Manger())
-                    {
-                    }
-                    else
-                    {
-                        Nourriture = null;
-                        break;
-                    } **/
                 }
             }
             base.MiseAjour();
+            if (Nourriture.EstVide()) this.RefTerrain.CasesNourritureTrigger.Add(this.AdapteurNormal());
         }
 
         public override bool ContientNourriture()
