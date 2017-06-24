@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FourmiliereSolution.Model;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Timers;
@@ -9,26 +10,25 @@ namespace FourmiliereSolution
     public class FourmiliereViewModel : ViewModelBase
     {
 
-        private int dimX;
-        private int dimY;
-
-        public int DimX
+        private int dim;
+        private Terrain terrain;
+        public int Dim
         {
-            get { return dimX; }
+            get { return dim; }
             set
             {
-                dimX = value;
-                OnPropertyChanged("DimX");
+                dim = value;
+                OnPropertyChanged("Dim");
             }
         }
 
-        public int DimY
+        public Terrain Terrain
         {
-            get { return dimY; }
+            get { return terrain; }
             set
             {
-                dimY = value;
-                OnPropertyChanged("DimY");
+                terrain = value;
+                OnPropertyChanged("Terrain");
             }
         }
 
@@ -76,26 +76,26 @@ namespace FourmiliereSolution
             FourmisList.Remove(FourmiSelect);
         }
 
-        public FourmiliereViewModel(int _DimX = 20, int _DimY = 20)
+        public FourmiliereViewModel(int _Dim = 50)
         {
-            DimX = _DimX;
-            DimY = _DimY;
+            Dim = _Dim;
+            Terrain = new Terrain(Dim);
             TitreApplication = "Fourmilière MOC 2";
             VitesseExec = 200;
             FourmisList = new ObservableCollection<Fourmi>();
-            FourmisList.Add(new Fourmi("Alain", DimX, DimY));
-            FourmisList.Add(new Fourmi("Bernard", DimX, DimY));
-            FourmisList.Add(new Fourmi("Claude", DimX, DimY));
-            FourmisList.Add(new Fourmi("Dorian", DimX, DimY));
-            FourmisList.Add(new Fourmi("Emilien", DimX, DimY));
-            FourmisList.Add(new Fourmi("Francis", DimX, DimY));
+            FourmisList.Add(new Fourmi("Alain", Dim, Dim));
+            FourmisList.Add(new Fourmi("Bernard", Dim, Dim));
+            FourmisList.Add(new Fourmi("Claude", Dim, Dim));
+            FourmisList.Add(new Fourmi("Dorian", Dim, Dim));
+            FourmisList.Add(new Fourmi("Emilien", Dim, Dim));
+            FourmisList.Add(new Fourmi("Francis", Dim, Dim));
         }
 
         internal void move()
         {
             foreach (var fourmi in FourmisList)
             {
-                fourmi.AvanceHazard(DimX, DimY);
+                fourmi.AvanceHazard(Dim, Dim);
             }
         }
 
@@ -120,9 +120,8 @@ namespace FourmiliereSolution
 
         internal void tourSuivant()
         {
-            loseLife();
             stop();
-            move();
+            Terrain.MiseAjour();
         }
 
         internal void avance()
@@ -132,8 +131,7 @@ namespace FourmiliereSolution
             while(Runnin)
             {
                 Thread.Sleep(VitesseExec);
-                loseLife();
-                move();
+                Terrain.MiseAjour();
             }
         }
 
@@ -152,7 +150,7 @@ namespace FourmiliereSolution
             FourmisList.Add(new Fourmi("N°" + (FourmisList.Count + 1)));
             while (FourmisList[FourmisList.Count - 1].EtapesList.Count < 8)
             {
-                FourmisList.Add(new Fourmi("N°" + (FourmisList.Count + 1), DimX, DimY));
+                FourmisList.Add(new Fourmi("N°" + (FourmisList.Count + 1), Dim, Dim));
             }
         }
 

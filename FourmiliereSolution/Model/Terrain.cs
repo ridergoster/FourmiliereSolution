@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    class Terrain
+    public class Terrain
     {
         // CONTIENT UN ARRAY 2D DE CASE DE X SUR Y TAILLE
-        public CaseAbstrait[,] Cases;
+        public CaseAbstrait[,] Cases { get; set; }
 
-        public Terrain(CaseAbstrait[,] _Cases)
+        public Terrain(int number)
         {
-            Cases = _Cases;
+            Cases = new CaseAbstrait[number, number];
+            for (int i = 0; i < number; i++)
+            {
+                for (int j = 0; j < number; j++)
+                {
+                    Cases[i, j] = new CaseNormal(this, i, j);
+                }
+            }
         }
 
         // FONCTION MiseAjour

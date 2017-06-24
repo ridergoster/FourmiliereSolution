@@ -30,9 +30,9 @@ namespace FourmiliereSolution.Model
                 }
                 i++;
             }
-            if ((i + 1) == list.Count && nbPheromoneMaisonMax == 0)
+            if (i == list.Count && nbPheromoneMaisonMax == 0 && i != optimal)
             {
-                return list[Hasard.Next(0, (list.Count - 1))];
+                return list[Hasard.Next(0, list.Count)];
             }
             return list[optimal];
         }

@@ -17,7 +17,7 @@ namespace FourmiliereSolution
 
         public App()
         {
-            FourmiliereVM = new FourmiliereViewModel(10, 10);
+            FourmiliereVM = new FourmiliereViewModel(20);
         }
     }
 }

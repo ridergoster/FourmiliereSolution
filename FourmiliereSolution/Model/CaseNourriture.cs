@@ -10,9 +10,9 @@ namespace FourmiliereSolution.Model
     {
         public Nourriture Nourriture { get; set; }
 
-        public CaseNourriture(CaseAbstrait _refCase, Nourriture nourriture) : base(_refCase.RefTerrain, _refCase.CordX, _refCase.CordY)
+        public CaseNourriture(Terrain _RefTerrain, int _cordX, int _cordY) : base(_RefTerrain, _cordX, _cordY)
         {
-            Nourriture = nourriture;
+
         }
 
         // lance le MiseAjour de base pour déplacement de fourmi puis  lance MiseAjour nourriture

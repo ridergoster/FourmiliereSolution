@@ -28,9 +28,10 @@ namespace FourmiliereSolution.Model
                 }
                 i++;
             }
-            if ((i + 1) == list.Count && nbPheromoneNourritureMax == 0)
+            Console.WriteLine("MOVING _");
+            if (i == list.Count && nbPheromoneNourritureMax == 0 && i != optimal)
             {
-                return list[Hasard.Next(0, (list.Count - 1))];
+                return list[Hasard.Next(0, list.Count)];
             }
             return list[optimal];
         } 

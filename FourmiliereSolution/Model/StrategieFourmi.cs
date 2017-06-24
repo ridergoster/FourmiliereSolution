@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    interface StrategieFourmi
+    public interface StrategieFourmi
     {
         CaseAbstrait MiseAjour(CaseAbstrait refCase);
     }

@@ -38,6 +38,10 @@ namespace FourmiliereSolution.Model
             {
                 NombreNourritures--;
             }
+            else if (NombreTours == 2)
+            {
+                RefCase.AjouterEnAjoutFourmi(new Fourmi(RefCase));
+            }
         }
     }
 }

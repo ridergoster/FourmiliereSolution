@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    class Fourmi
+    public class Fourmi
     {
         static Random Hasard = new Random();
         // CONTIENT REFERENCE SUR LA CASE

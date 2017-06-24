@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using FourmiliereSolution.Model;
 
 namespace FourmiliereSolution
 {
@@ -25,13 +26,17 @@ namespace FourmiliereSolution
     {
         DispatcherTimer dt = new DispatcherTimer();
         Stopwatch sw = new Stopwatch();
+        public FabriqueGeneral FabriqueGeneral { get; set; } = new FabriqueGeneral();
         public MainWindow()
         {
             InitializeComponent();
             dt.Tick += new EventHandler(redessine_Tick);
             dt.Interval = new TimeSpan(0, 0, 0, 0, 200);
-            DessinePlateau();
+            FabriqueGeneral.PopulerTerrain(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim);
+            FabriqueGeneral.AjouterFourmiliere(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim/2, App.FourmiliereVM.Dim/2);
+            FabriqueGeneral.GenererPremiereFourmis(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim / 2, App.FourmiliereVM.Dim / 2, 5);
             DataContext = App.FourmiliereVM;
+            DessinePlateau();
         }
 
         private void redessine_Tick(object sender, EventArgs e)
@@ -46,11 +51,11 @@ namespace FourmiliereSolution
             Plateau.RowDefinitions.Clear();
             Plateau.Children.Clear();
 
-            for (int i = 0; i < App.FourmiliereVM.DimX; i++)
+            for (int i = 0; i < App.FourmiliereVM.Dim; i++)
             {
                 Plateau.ColumnDefinitions.Add(new ColumnDefinition());
             }
-            for (int i = 0; i < App.FourmiliereVM.DimY; i++)
+            for (int i = 0; i < App.FourmiliereVM.Dim; i++)
             {
                 Plateau.RowDefinitions.Add(new RowDefinition());
             }
@@ -63,15 +68,32 @@ namespace FourmiliereSolution
             Grid.SetColumn(e, 1);
             Grid.SetRow(e, 1);
 
-
-
-            foreach(var fourmi in App.FourmiliereVM.FourmisList)
+            foreach(CaseAbstrait refCase in App.FourmiliereVM.Terrain.Cases)
             {
-                Image img = new Image();
-                img.Source = new BitmapImage(new Uri("/fourmi_preview.png", UriKind.Relative));
-                Plateau.Children.Add(img);
-                Grid.SetColumn(img, fourmi.X);
-                Grid.SetRow(img, fourmi.Y);
+                if(refCase.ContientFourmiliere())
+                {
+                    Image img = new Image();
+                    img.Source = new BitmapImage(new Uri("/maison.png", UriKind.Relative));
+                    Plateau.Children.Add(img);
+                    Grid.SetColumn(img, refCase.CordX);
+                    Grid.SetRow(img, refCase.CordY);
+                }
+                else if (refCase.ContientNourriture())
+                {
+                    Image img = new Image();
+                    img.Source = new BitmapImage(new Uri("/nourriture.png", UriKind.Relative));
+                    Plateau.Children.Add(img);
+                    Grid.SetColumn(img, refCase.CordX);
+                    Grid.SetRow(img, refCase.CordY);
+                }
+                if (refCase.ContientFourmis())
+                {
+                    Image img = new Image();
+                    img.Source = new BitmapImage(new Uri("/fourmi.png", UriKind.Relative));
+                    Plateau.Children.Add(img);
+                    Grid.SetColumn(img, refCase.CordX);
+                    Grid.SetRow(img, refCase.CordY);
+                }
             }
         }
 

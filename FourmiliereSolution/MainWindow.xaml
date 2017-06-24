@@ -65,7 +65,6 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="fourmi_preview.png" Height="20" Width="20" HorizontalAlignment="Center"/>
                             <TextBlock Grid.Column="1" Text="{Binding Nom}" HorizontalAlignment="Left"/>
                             <!--<TextBlock Grid.Column="2" Text="{Binding EtapesList.Count}" HorizontalAlignment="Center"/>-->
                             <TextBlock Grid.Column="2" Text="{Binding Health}" HorizontalAlignment="Center"/>

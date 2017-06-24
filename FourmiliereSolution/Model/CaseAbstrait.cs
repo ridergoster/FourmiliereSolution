@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    abstract class CaseAbstrait
+    public abstract class CaseAbstrait
     {
         public int CordX { get; set; }
         public int CordY { get; set; }
@@ -17,9 +17,9 @@ namespace FourmiliereSolution.Model
         // CONTIENT UN NB DE PHEROMONE "NOURRITURE"
         public int PheromoneNourriture { get; set; }
         // CONTIENT UN ARRAY DE FOURMI SUR LA CASE
-        public List<Fourmi> Fourmis { get; set; }
-        public List<Fourmi> FourmisEnAjout { get; set; }
-        public List<Fourmi> FourmisASupprimer { get; set; }
+        public List<Fourmi> Fourmis { get; set; } = new List<Fourmi>();
+        public List<Fourmi> FourmisEnAjout { get; set; } = new List<Fourmi>();
+        public List<Fourmi> FourmisASupprimer { get; set; } = new List<Fourmi>();
 
         public CaseAbstrait(Terrain _RefTerrain, int _cordX, int _cordY)
         {
@@ -94,6 +94,10 @@ namespace FourmiliereSolution.Model
         public abstract bool ContientNourriture();
         public abstract bool ContientFourmiliere();
 
+        public bool ContientFourmis()
+        {
+            return Fourmis.Count > 0;
+        }
         public virtual void MiseAjour()
         {
             if (this is CaseNourriture && this.ContientNourriture() == false || this is CaseFourmiliere && this.ContientFourmiliere() == false)

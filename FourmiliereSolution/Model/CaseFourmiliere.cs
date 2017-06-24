@@ -9,14 +9,16 @@ namespace FourmiliereSolution.Model
     class CaseFourmiliere : CaseAbstrait
     {
         public Fourmiliere Fourmiliere { get; set; }
-        public CaseFourmiliere(CaseAbstrait _refCase, Fourmiliere fourmiliere) : base(_refCase.RefTerrain, _refCase.CordX, _refCase.CordY)
+
+        public CaseFourmiliere(Terrain _RefTerrain, int _cordX, int _cordY) : base(_RefTerrain, _cordX, _cordY)
         {
-            Fourmiliere = fourmiliere;
+
         }
 
         // lance le MiseAjour de base pour déplacement de fourmi puis  lance MiseAjour fourmiliere
         public override void MiseAjour()
         {
+            Fourmiliere.MiseAjour();
             foreach (Fourmi fourmi in Fourmis)
             {
                 if (fourmi.StrategieFourmi is StrategieRetourMaison)
