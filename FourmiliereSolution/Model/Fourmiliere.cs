@@ -9,19 +9,22 @@ namespace FourmiliereSolution.Model
     class Fourmiliere
     {
         // CONTIENT REFERENCE SUR LA CASE
-        private Case RefCase { get; set; }
+        private CaseAbstrait RefCase { get; set; }
         // CONTIENT UN NBNOURRITURE RECOLTE
         private int NombreNourritures { get; set; } = 0;
         // CONTIENT UN NBTOUR
         private int NombreTours { get; set; } = 0;
 
-        public Fourmiliere(Case _RefCase)
+        public Fourmiliere(CaseAbstrait _RefCase)
         {
             RefCase = _RefCase;
         }
 
         // FONCTION: ADD / SUPP NOURRITURE && GET / SET NBNOURRITURE
-
+        public void AjouterNourriture()
+        {
+            NombreNourritures++;
+        }
 
         // FONCTION GENERE FOURMI => GENERE UNE FOURMI SUR LA CASE AVEC PLUS OU MOINS DE CHANCE SELON LE NB NOURRITURE
 

@@ -6,27 +6,36 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    class CaseFourmiliere : Case
+    class CaseFourmiliere : CaseAbstrait
     {
-        private Fourmiliere fourmiliere;
-        public Fourmiliere Fourmiliere { get => fourmiliere; set => fourmiliere = value; }
-        public CaseFourmiliere(Case _refCase, Fourmiliere fourmiliere) : base(_refCase.RefTerrain, _refCase.CordX, _refCase.CordY)
+        public Fourmiliere Fourmiliere { get; set; }
+        public CaseFourmiliere(CaseAbstrait _refCase, Fourmiliere fourmiliere) : base(_refCase.RefTerrain, _refCase.CordX, _refCase.CordY)
         {
-            ContientFourmiliere = true;
             Fourmiliere = fourmiliere;
         }
 
         // lance le MiseAjour de base pour déplacement de fourmi puis  lance MiseAjour fourmiliere
         public override void MiseAjour()
         {
+            foreach (Fourmi fourmi in Fourmis)
+            {
+                if (fourmi.StrategieFourmi is StrategieRetourMaison)
+                {
+                    Fourmiliere.AjouterNourriture();
+                    fourmi.StrategieFourmi = new StrategieRechercheNourriture();
+                }
+            }
             base.MiseAjour();
-            Fourmiliere.MiseAjour();
         }
 
-        // dessine une fourmiliere
-        public override void draw()
+        public override bool ContientNourriture()
         {
-            base.draw();
+            return false;
+        }
+
+        public override bool ContientFourmiliere()
+        {
+            return true;
         }
     }
 }

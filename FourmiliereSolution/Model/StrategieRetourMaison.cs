@@ -9,17 +9,16 @@ namespace FourmiliereSolution.Model
     class StrategieRetourMaison : StrategieFourmi
     {
         public bool Manger { get; set; } = true;
-        public bool Trigger { get; set; } = false;
 
         static Random Hasard = new Random();
-        private Case CaseMaisonOptimal(List<Case> list)
+        private CaseAbstrait CaseMaisonOptimal(List<CaseAbstrait> list)
         {
             int i = 0;
             int optimal = 0;
             int nbPheromoneMaisonMax = 0;
-            foreach (Case caseItem in list)
+            foreach (CaseAbstrait caseItem in list)
             {
-                if (caseItem.ContientFourmiliere == true)
+                if (caseItem is CaseFourmiliere)
                 {
                     optimal = i;
                     break;
@@ -37,19 +36,17 @@ namespace FourmiliereSolution.Model
             }
             return list[optimal];
         }
-        public Case MiseAjour(Case refCase)
+        public CaseAbstrait MiseAjour(CaseAbstrait refCase)
         {
-            if (refCase.ContientFourmiliere)
+            if (refCase.ContientFourmiliere())
             {
-                // enlever nourrituer a la case et trigger a true pour changer de strategie
-                Trigger = true;
-                Manger = false;
                 return refCase;
             }
             else
             {
-                List<Case> list = refCase.CasesAdjacentes();
-                Case caseOptimal = CaseMaisonOptimal(list);
+                refCase.AjouterPheromoneNourriture();
+                List<CaseAbstrait> list = refCase.CasesAdjacentes();
+                CaseAbstrait caseOptimal = CaseMaisonOptimal(list);
                 return caseOptimal;
             }
         }

@@ -8,8 +8,6 @@ namespace FourmiliereSolution.Model
 {
     interface StrategieFourmi
     {
-        bool Manger { get; set; }
-        bool Trigger { get; set; }
-        Case MiseAjour(Case refCase);
+        CaseAbstrait MiseAjour(CaseAbstrait refCase);
     }
 }
