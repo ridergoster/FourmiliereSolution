@@ -8,6 +8,6 @@ namespace FourmiliereSolution.Model
 {
     public interface StrategieFourmi
     {
-        CaseAbstrait MiseAjour(CaseAbstrait refCase);
+        CaseAbstrait MiseAjour(Fourmi fourmi);
     }
 }

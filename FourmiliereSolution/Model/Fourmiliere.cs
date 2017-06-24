@@ -32,15 +32,12 @@ namespace FourmiliereSolution.Model
         // FONCTION MiseAjour => CONSOMME 1 NOURRITURE TOUT LES X tour puis appel genere fourmi
         public void MiseAjour()
         {
+            RefCase.AjouterEnAjoutFourmi(new Fourmi(RefCase));
             NombreTours = ((NombreTours + 1) % 20);
 
             if (NombreTours == 0)
             {
                 NombreNourritures--;
-            }
-            else if (NombreTours == 2)
-            {
-                RefCase.AjouterEnAjoutFourmi(new Fourmi(RefCase));
             }
         }
     }

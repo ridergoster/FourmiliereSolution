@@ -35,16 +35,17 @@ namespace FourmiliereSolution.Model
             }
             return list[optimal];
         } 
-        public CaseAbstrait MiseAjour(CaseAbstrait refCase)
+        public CaseAbstrait MiseAjour(Fourmi fourmi)
         {
-            if (refCase.ContientNourriture())
+            if (fourmi.RefCase.ContientNourriture())
             {
-                return refCase;
+                return fourmi.RefCase;
             }
             else
             {
-                refCase.AjouterPheromoneMaison();
-                List<CaseAbstrait> list = refCase.CasesAdjacentes();
+                fourmi.RefCase.AjouterPheromoneMaison(fourmi.Vie);
+                List<CaseAbstrait> list = fourmi.RefCase.CasesAdjacentes();
+                list.Remove(fourmi.OldCase);
                 CaseAbstrait caseOptimal = CaseNourritureOptimal(list);
                 return caseOptimal;
             }

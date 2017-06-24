@@ -13,9 +13,12 @@ namespace FourmiliereSolution.Model
         // CONTIENT UNE REF SUR LE TERRAIN
         public Terrain RefTerrain { get; set; }
         // CONTIENT UN NB DE PHEROMONE "MAISON"
-        public int PheromoneMaison { get; set; }
+        public int PheromoneMaison { get; set; } = 0;
+        public int PheromoneNourriture { get; set; } = 0;
+        public int FacteurPheromoneMaison { get; set; } = 4;
+        public int FacteurPheromoneNourriture { get; set; } = 6;
         // CONTIENT UN NB DE PHEROMONE "NOURRITURE"
-        public int PheromoneNourriture { get; set; }
+        public int nbTours { get; set; } = 0;
         // CONTIENT UN ARRAY DE FOURMI SUR LA CASE
         public List<Fourmi> Fourmis { get; set; } = new List<Fourmi>();
         public List<Fourmi> FourmisEnAjout { get; set; } = new List<Fourmi>();
@@ -28,24 +31,24 @@ namespace FourmiliereSolution.Model
             CordY = _cordY;
         }
 
-        public void AjouterPheromoneMaison()
+        public void AjouterPheromoneMaison(int value)
         {
-            PheromoneMaison++;
+            PheromoneMaison += value;
         }
 
         public void SupprimerPheromoneMaison()
         {
-            PheromoneMaison--;
+            if (PheromoneMaison > 0) PheromoneMaison--;
         }
 
-        public void AjouterPheromoneNourriture()
+        public void AjouterPheromoneNourriture(int value)
         {
-            PheromoneNourriture++;
+            PheromoneNourriture += value;
         }
 
         public void SupprimerPheromoneNourriture()
         {
-            PheromoneNourriture--;
+            if (PheromoneNourriture > 0) PheromoneNourriture--;
         }
 
         public void AjouterASupprimerFourmi(Fourmi NouvelleFourmi)
@@ -100,6 +103,9 @@ namespace FourmiliereSolution.Model
         }
         public virtual void MiseAjour()
         {
+            nbTours++;
+            SupprimerPheromoneMaison();
+            SupprimerPheromoneNourriture();
             if (this is CaseNourriture && this.ContientNourriture() == false || this is CaseFourmiliere && this.ContientFourmiliere() == false)
             {
                 // transforme en case normal

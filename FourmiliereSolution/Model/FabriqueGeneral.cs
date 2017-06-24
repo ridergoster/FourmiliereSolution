@@ -8,6 +8,8 @@ namespace FourmiliereSolution.Model
 {
     public class FabriqueGeneral
     {
+        public static Random Hasard = new Random();
+
         public Terrain GenererTerrain(int number)
         {
             return new Terrain(number);
@@ -29,6 +31,17 @@ namespace FourmiliereSolution.Model
             CaseFourmiliere caseFourmiliere = new CaseFourmiliere(terrain, posFX, posFY);
             terrain.Cases[posFX, posFY] = caseFourmiliere;
             caseFourmiliere.Fourmiliere = new Fourmiliere(terrain.Cases[posFX, posFY]);
+        }
+
+        public void AjouterNourriture(Terrain terrain, int tailleMax, int poids)
+        {
+            CaseAbstrait refCase;
+            while (!((refCase = terrain.Cases[Hasard.Next(0, tailleMax), Hasard.Next(0, tailleMax)]) is CaseNormal))
+            {
+            }
+            CaseNourriture caseNourriture = new CaseNourriture(terrain, refCase.CordX, refCase.CordY);
+            terrain.Cases[refCase.CordX, refCase.CordY] = caseNourriture;
+            caseNourriture.Nourriture = new Nourriture(caseNourriture, poids);
         }
 
         public void GenererPremiereFourmis(Terrain terrain, int posFX, int posFY, int nbFourmis)

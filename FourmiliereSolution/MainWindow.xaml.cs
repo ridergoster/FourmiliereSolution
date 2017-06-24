@@ -34,7 +34,11 @@ namespace FourmiliereSolution
             dt.Interval = new TimeSpan(0, 0, 0, 0, 200);
             FabriqueGeneral.PopulerTerrain(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim);
             FabriqueGeneral.AjouterFourmiliere(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim/2, App.FourmiliereVM.Dim/2);
+            FabriqueGeneral.AjouterNourriture(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim, 10);
+            FabriqueGeneral.AjouterNourriture(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim, 10);
+
             FabriqueGeneral.GenererPremiereFourmis(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim / 2, App.FourmiliereVM.Dim / 2, 5);
+
             DataContext = App.FourmiliereVM;
             DessinePlateau();
         }
@@ -90,6 +94,14 @@ namespace FourmiliereSolution
                 {
                     Image img = new Image();
                     img.Source = new BitmapImage(new Uri("/fourmi.png", UriKind.Relative));
+                    foreach (Model.Fourmi fourmi in refCase.Fourmis)
+                    {
+                        if (fourmi.StrategieFourmi is StrategieRetourMaison)
+                        {
+                            img.Source = new BitmapImage(new Uri("/fourmi_maison.png", UriKind.Relative));
+                            break;
+                        }
+                    }
                     Plateau.Children.Add(img);
                     Grid.SetColumn(img, refCase.CordX);
                     Grid.SetRow(img, refCase.CordY);

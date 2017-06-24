@@ -8,11 +8,12 @@ namespace FourmiliereSolution.Model
 {
     public class Fourmi
     {
-        static Random Hasard = new Random();
         // CONTIENT REFERENCE SUR LA CASE
-        private CaseAbstrait RefCase { get; set; }
+        public CaseAbstrait RefCase { get; set; }
+        public CaseAbstrait OldCase { get; set; }
+
         // CONTIENT UN NB VIE
-        public int Vie { get; set; } = Hasard.Next(50, 100);
+        public int Vie { get; set; } = 100;
         // CONTIENT STRATEGIE 
         public StrategieFourmi StrategieFourmi { get; set; } = new StrategieRechercheNourriture();
 
@@ -25,21 +26,20 @@ namespace FourmiliereSolution.Model
         // le plus de phéromone maison ou nourriture
         public void MiseAjour()
         {
+            CaseAbstrait newCase = StrategieFourmi.MiseAjour(this);
             Vie--;
-            if(Vie == 0)
+
+            if (Vie == 0)
             {
                 RefCase.AjouterASupprimerFourmi(this);
                 RefCase = null;
             }
-            else
+            else if (newCase != RefCase)
             {
-                CaseAbstrait newCase = StrategieFourmi.MiseAjour(RefCase);
-                if (newCase != RefCase)
-                {
-                    RefCase.AjouterASupprimerFourmi(this);
-                    RefCase = newCase;
-                    RefCase.AjouterEnAjoutFourmi(this);
-                }
+                RefCase.AjouterASupprimerFourmi(this);
+                OldCase = RefCase;
+                RefCase = newCase;
+                RefCase.AjouterEnAjoutFourmi(this);
             }
         }
     }
