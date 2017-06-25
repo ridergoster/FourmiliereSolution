@@ -1,0 +1,121 @@
+﻿<Window x:Class="FourmiliereSolution.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FourmiliereSolution"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="533.718" Width="817.308">
+    <Window.Resources>
+        <local:OpenAbout x:Key="OpenAbout"/>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control"
+                Key="G"
+                Command="{StaticResource OpenAbout}" 
+                CommandParameter="window input binding" />
+    </Window.InputBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open"/>
+                <MenuItem Header="_Save"/>
+                <MenuItem 
+                    x:Name="AppAbout" 
+                    Header="_About"  
+                    HorizontalAlignment="Left"
+                    Width="200" 
+                    Command="{StaticResource OpenAbout}" 
+                    InputGestureText="Ctrl+G">
+                </MenuItem>
+                <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="200" />
+            </MenuItem>
+        </Menu>
+        <Grid ShowGridLines="true" Height="477" VerticalAlignment="Top" Margin="0,0,0,-68" Width="818">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding TitreApplication}" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Statistique.NombreFourmis, StringFormat='{}{0} Fourmis'}" Grid.Row="0" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Statistique.NombreTours, StringFormat='{}{0} tours'}" Grid.Row="0" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <ListBox 
+            Grid.Row="1"
+            Grid.Column="0"
+            ItemsSource="{Binding FourmisList}" 
+            FontSize="14" 
+            HorizontalContentAlignment="Stretch"
+            Background="{x:Null}"
+            SelectedItem="{Binding FourmiSelect}">
+                <ListBox.InputBindings>
+                    <KeyBinding Key="Delete" Command="{Binding removeFourmis}"></KeyBinding>
+                </ListBox.InputBindings>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Text="{Binding Nom}" HorizontalAlignment="Left"/>
+                            <!--<TextBlock Grid.Column="2" Text="{Binding EtapesList.Count}" HorizontalAlignment="Center"/>-->
+                            <TextBlock Grid.Column="2" Text="{Binding Health}" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid Name="Plateau" Grid.Column="1" Grid.Row="1" />
+
+            <Grid Grid.Row="1" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" Text="{Binding FourmiSelect.Nom}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="2" Text="{Binding FourmiSelect.Health}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" FontSize="14"  Content="Tour Suivant" Name="btnNext" Click="btnNext_Click"/>
+                <Button Grid.Column="1" FontSize="14"  Content="Avance..." Name="btnAvance" Click="btnAvance_Click"/>
+                <Slider Grid.Column="2" Minimum="100" Maximum="2000" Value="{Binding VitesseExec}" />
+                <Button Grid.Column="3" FontSize="14"  Content="Stop" Name="btnStop" Click="btnStop_Click"/>
+            </Grid>
+            <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            Content="Add Fourmi"
+            FontSize="14"
+            Name="btnAdd"
+            Click="btnAdd_Click"
+            Margin="5"
+            />
+            <Button
+            Grid.Row="3"
+            Grid.Column="0"
+            FontSize="14"
+            Name="btnRemove"
+            Margin="5" Click="btnRemove_Click">
+                <Button.Content>
+                    <TextBlock Text="{Binding FourmiSelect.Nom, StringFormat='{}Delete {0}'}"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+    </DockPanel>
+</Window>

@@ -13,11 +13,11 @@ namespace FourmiliereSolution
     /// </summary>
     public partial class App : Application
     {
-        public static FourmiliereViewModel FourmiliereVM { get; set; }
+        public static MainViewModel MainVM { get; set; }
 
         public App()
         {
-            FourmiliereVM = new FourmiliereViewModel(20);
+            MainVM = new MainViewModel(20);
         }
     }
 }

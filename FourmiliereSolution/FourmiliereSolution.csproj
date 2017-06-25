@@ -54,11 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AproposViewModel.cs" />
-    <Compile Include="AproposWindow.xaml.cs">
+    <Compile Include="OpenAbout.cs" />
+    <Compile Include="View\AproposViewModel.cs" />
+    <Compile Include="View\AproposWindow.xaml.cs">
       <DependentUpon>AproposWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Etape.cs" />
     <Compile Include="Model\CaseNormal.cs" />
     <Compile Include="Model\CaseAbstrait.cs" />
     <Compile Include="Model\CaseFourmiliere.cs" />
@@ -68,17 +68,17 @@
     <Compile Include="Model\Fourmiliere.cs" />
     <Compile Include="Model\Jeux.cs" />
     <Compile Include="Model\Nourriture.cs" />
+    <Compile Include="Model\Statistique.cs" />
     <Compile Include="Model\StrategieFourmi.cs" />
     <Compile Include="Model\StrategieRechercheNourriture.cs" />
     <Compile Include="Model\StrategieRetourMaison.cs" />
     <Compile Include="Model\Terrain.cs" />
-    <Compile Include="OpenAbout.cs" />
-    <Compile Include="ViewModelBase.cs" />
-    <Page Include="AproposWindow.xaml">
+    <Compile Include="Observeur.cs" />
+    <Page Include="View\AproposWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -86,9 +86,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Fourmi.cs" />
-    <Compile Include="FourmiliereViewModel.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainViewModel.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -120,14 +119,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="fourmi.png" />
-    <Resource Include="maison.png" />
+    <Resource Include="Ressource\fourmi.png" />
+    <Resource Include="Ressource\maison.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="nourriture.png" />
+    <Resource Include="Ressource\nourriture.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="fourmi_maison.png" />
+    <Resource Include="Ressource\fourmi_maison.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

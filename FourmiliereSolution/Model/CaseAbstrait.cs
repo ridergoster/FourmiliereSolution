@@ -36,9 +36,16 @@ namespace FourmiliereSolution.Model
             PheromoneMaison += value;
         }
 
-        public void SupprimerPheromoneMaison()
+        public void SupprimerPheromoneMaison(int valeur)
         {
-            if (PheromoneMaison > 0) PheromoneMaison--;
+            if (PheromoneMaison > valeur)
+            {
+                PheromoneMaison -= valeur;
+            }
+            else
+            {
+                PheromoneMaison = 0;
+            } 
         }
 
         public void AjouterPheromoneNourriture(int value)
@@ -46,9 +53,16 @@ namespace FourmiliereSolution.Model
             PheromoneNourriture += value;
         }
 
-        public void SupprimerPheromoneNourriture()
+        public void SupprimerPheromoneNourriture(int valeur)
         {
-            if (PheromoneNourriture > 0) PheromoneNourriture--;
+            if (PheromoneNourriture > valeur)
+            {
+                PheromoneNourriture -= valeur;
+            }
+            else
+            {
+                PheromoneNourriture = 0;
+            }
         }
 
         public void AjouterASupprimerFourmi(Fourmi NouvelleFourmi)
@@ -104,12 +118,12 @@ namespace FourmiliereSolution.Model
         public virtual void MiseAjour()
         {
             nbTours++;
-            SupprimerPheromoneMaison();
-            SupprimerPheromoneNourriture();
             foreach(Fourmi fourmi in Fourmis)
             {
                 fourmi.MiseAjour();
             }
+            //SupprimerPheromoneMaison(1);
+            //SupprimerPheromoneNourriture(1);
         }
 
         public CaseNormal AdapteurNormal()

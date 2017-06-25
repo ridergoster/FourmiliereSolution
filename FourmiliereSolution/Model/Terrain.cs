@@ -12,11 +12,11 @@ namespace FourmiliereSolution.Model
         public CaseAbstrait[,] Cases { get; set; }
         public List<CaseAbstrait> CasesNourritureTrigger { get; set; } = new List<CaseAbstrait>();
         public FabriqueGeneral FabriqueGeneral { get; set; } = new FabriqueGeneral();
-        public int Size;
-
+        public int Taille { get; set; }
+        public int NbTours { get; set; } = 0;
         public Terrain(int number)
         {
-            Size = number;
+            Taille = number;
             Cases = new CaseAbstrait[number, number];
             for (int i = 0; i < number; i++)
             {
@@ -30,6 +30,7 @@ namespace FourmiliereSolution.Model
         // FONCTION MiseAjour
         public void MiseAjour()
         {
+            NbTours++;
             foreach(CaseAbstrait refCase in Cases)
             {
                 refCase.MiseAjour(); // mettre à jour la case
@@ -40,7 +41,7 @@ namespace FourmiliereSolution.Model
                 foreach(CaseAbstrait caseReset in CasesNourritureTrigger)
                 {
                     Cases[caseReset.CordX, caseReset.CordY] = caseReset;
-                    FabriqueGeneral.AjouterNourritureAuHasard(this, Size, 10);
+                    FabriqueGeneral.AjouterNourritureAuHasard(this, Taille, 10);
                 }
                 CasesNourritureTrigger.Clear();
             }
