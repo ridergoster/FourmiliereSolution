@@ -106,10 +106,6 @@ namespace FourmiliereSolution.Model
             nbTours++;
             SupprimerPheromoneMaison();
             SupprimerPheromoneNourriture();
-            if (this is CaseNourriture && this.ContientNourriture() == false || this is CaseFourmiliere && this.ContientFourmiliere() == false)
-            {
-                // transforme en case normal
-            }
             foreach(Fourmi fourmi in Fourmis)
             {
                 fourmi.MiseAjour();
@@ -130,6 +126,40 @@ namespace FourmiliereSolution.Model
             foreach (Fourmi fourmi in CaseNormal.FourmisEnAjout) fourmi.RefCase = CaseNormal;
             CaseNormal.nbTours = this.nbTours;
             return CaseNormal;
+        }
+
+        public CaseNourriture AdapteurNourriture(int poids)
+        {
+            CaseNourriture CaseNourriture = new CaseNourriture(this.RefTerrain, this.CordX, this.CordY);
+            CaseNourriture.FacteurPheromoneMaison = this.FacteurPheromoneMaison;
+            CaseNourriture.FacteurPheromoneNourriture = this.FacteurPheromoneNourriture;
+            CaseNourriture.PheromoneMaison = this.PheromoneMaison;
+            CaseNourriture.PheromoneNourriture = this.PheromoneNourriture;
+            CaseNourriture.Fourmis = this.Fourmis;
+            CaseNourriture.FourmisASupprimer = this.FourmisASupprimer;
+            CaseNourriture.FourmisEnAjout = this.FourmisEnAjout;
+            foreach (Fourmi fourmi in CaseNourriture.Fourmis) fourmi.RefCase = CaseNourriture;
+            foreach (Fourmi fourmi in CaseNourriture.FourmisEnAjout) fourmi.RefCase = CaseNourriture;
+            CaseNourriture.nbTours = this.nbTours;
+            CaseNourriture.Nourriture = new Nourriture(CaseNourriture, poids);
+            return CaseNourriture;
+        }
+
+        public CaseFourmiliere AdapteurFourmiliere(int nbFourmis)
+        {
+            CaseFourmiliere CaseFourmiliere = new CaseFourmiliere(this.RefTerrain, this.CordX, this.CordY);
+            CaseFourmiliere.FacteurPheromoneMaison = this.FacteurPheromoneMaison;
+            CaseFourmiliere.FacteurPheromoneNourriture = this.FacteurPheromoneNourriture;
+            CaseFourmiliere.PheromoneMaison = this.PheromoneMaison;
+            CaseFourmiliere.PheromoneNourriture = this.PheromoneNourriture;
+            CaseFourmiliere.Fourmis = this.Fourmis;
+            CaseFourmiliere.FourmisASupprimer = this.FourmisASupprimer;
+            CaseFourmiliere.FourmisEnAjout = this.FourmisEnAjout;
+            foreach (Fourmi fourmi in CaseFourmiliere.Fourmis) fourmi.RefCase = CaseFourmiliere;
+            foreach (Fourmi fourmi in CaseFourmiliere.FourmisEnAjout) fourmi.RefCase = CaseFourmiliere;
+            CaseFourmiliere.nbTours = this.nbTours;
+            CaseFourmiliere.Fourmiliere = new Fourmiliere(CaseFourmiliere, nbFourmis);
+            return CaseFourmiliere;
         }
 
     }

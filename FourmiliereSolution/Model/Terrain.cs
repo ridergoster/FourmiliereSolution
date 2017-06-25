@@ -11,9 +11,12 @@ namespace FourmiliereSolution.Model
         // CONTIENT UN ARRAY 2D DE CASE DE X SUR Y TAILLE
         public CaseAbstrait[,] Cases { get; set; }
         public List<CaseAbstrait> CasesNourritureTrigger { get; set; } = new List<CaseAbstrait>();
+        public FabriqueGeneral FabriqueGeneral { get; set; } = new FabriqueGeneral();
+        public int Size;
 
         public Terrain(int number)
         {
+            Size = number;
             Cases = new CaseAbstrait[number, number];
             for (int i = 0; i < number; i++)
             {
@@ -37,6 +40,7 @@ namespace FourmiliereSolution.Model
                 foreach(CaseAbstrait caseReset in CasesNourritureTrigger)
                 {
                     Cases[caseReset.CordX, caseReset.CordY] = caseReset;
+                    FabriqueGeneral.AjouterNourritureAuHasard(this, Size, 10);
                 }
                 CasesNourritureTrigger.Clear();
             }
@@ -45,12 +49,6 @@ namespace FourmiliereSolution.Model
                 refCase.AjouterFourmi(); // ajouter fourmi post update
                 refCase.SupprimerFourmi(); // supprimer formi post update
             }
-        }
-
-        // FONCTION DRAW
-        public void DessineTerrain()
-        {
-
         }
     }
 }

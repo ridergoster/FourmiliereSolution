@@ -12,7 +12,6 @@ namespace FourmiliereSolution.Model
 
         public CaseFourmiliere(Terrain _RefTerrain, int _cordX, int _cordY) : base(_RefTerrain, _cordX, _cordY)
         {
-
         }
 
         // lance le MiseAjour de base pour déplacement de fourmi puis  lance MiseAjour fourmiliere

@@ -15,9 +15,13 @@ namespace FourmiliereSolution.Model
         // CONTIENT UN NBTOUR
         private int NombreTours { get; set; } = 0;
 
-        public Fourmiliere(CaseAbstrait _RefCase)
+        public Fourmiliere(CaseAbstrait _RefCase, int fourmisDefaut)
         {
             RefCase = _RefCase;
+            for (int i = 0; i < fourmisDefaut; i ++)
+            {
+                RefCase.Fourmis.Add(new Fourmi(RefCase));
+            }
         }
 
         // FONCTION: ADD / SUPP NOURRITURE && GET / SET NBNOURRITURE
@@ -32,12 +36,30 @@ namespace FourmiliereSolution.Model
         // FONCTION MiseAjour => CONSOMME 1 NOURRITURE TOUT LES X tour puis appel genere fourmi
         public void MiseAjour()
         {
-            RefCase.AjouterEnAjoutFourmi(new Fourmi(RefCase));
-            NombreTours = ((NombreTours + 1) % 20);
+            NombreTours++;
+            AjouterFourmis();
+        }
 
-            if (NombreTours == 0)
+        private void SupprimerNourriture()
+        {
+            if (NombreNourritures > 0)
+                NombreNourritures --;
+        }
+
+        private void AjouterFourmis()
+        {
+            if (NombreNourritures > 0)
             {
-                NombreNourritures--;
+                for (int i = 0; i <= 4 ; i++)
+                {
+                    RefCase.AjouterEnAjoutFourmi(new Fourmi(RefCase));
+                }
+                SupprimerNourriture();
+            }
+            else
+            {
+                if (NombreTours % 10 == 0)
+                    RefCase.AjouterEnAjoutFourmi(new Fourmi(RefCase));
             }
         }
     }

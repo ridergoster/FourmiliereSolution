@@ -32,12 +32,9 @@ namespace FourmiliereSolution
             InitializeComponent();
             dt.Tick += new EventHandler(redessine_Tick);
             dt.Interval = new TimeSpan(0, 0, 0, 0, 200);
-            FabriqueGeneral.PopulerTerrain(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim);
-            FabriqueGeneral.AjouterFourmiliere(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim/2, App.FourmiliereVM.Dim/2);
-            FabriqueGeneral.AjouterNourriture(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim, 10);
-            FabriqueGeneral.AjouterNourriture(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim, 10);
-
-            FabriqueGeneral.GenererPremiereFourmis(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim / 2, App.FourmiliereVM.Dim / 2, 5);
+            FabriqueGeneral.AjouterFourmiliereAuHasard(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim, 10);
+            FabriqueGeneral.AjouterNourritureAuHasard(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim, 10);
+            FabriqueGeneral.AjouterNourritureAuHasard(App.FourmiliereVM.Terrain, App.FourmiliereVM.Dim, 10);
 
             DataContext = App.FourmiliereVM;
             DessinePlateau();
@@ -65,12 +62,6 @@ namespace FourmiliereSolution
             }
 
             Plateau.ShowGridLines = true;
-
-            Ellipse e = new Ellipse();
-            e.Fill = new SolidColorBrush(Colors.Black);
-            Plateau.Children.Add(e);
-            Grid.SetColumn(e, 1);
-            Grid.SetRow(e, 1);
 
             foreach(CaseAbstrait refCase in App.FourmiliereVM.Terrain.Cases)
             {
