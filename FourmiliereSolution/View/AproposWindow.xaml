@@ -9,18 +9,44 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Grid.Row="0" Text="{Binding Copyright, StringFormat={}Copyright: {0}}"/>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Grid.Row="1" Text="{Binding Auteur, StringFormat={}Author: {0}}"/>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Grid.Row="2" Text="{Binding DateApplication, StringFormat={}Date: {0}}"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Copyright:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock Text="Ce logiciel est sous" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Text="aucune licence." HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Promotion:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="2" Grid.Row="2" Text="4A MOC2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Date:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="2" Grid.Row="3" Text="27/06/2017" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="Auteur:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock Text="Vincent Kocupyr" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Text="Baptiste Deléris" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Text="Rémi Ollivier" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+
+        </Grid>
         <Button
-            Grid.Row="3"
+            Grid.Row="1"
             Content="CLOSE"
-            Width="100"
-            Margin="30" Click="Button_Click"
+            Margin="10"
+            Click="Button_Click"
             IsDefault="True"
             />
     </Grid>

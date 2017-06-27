@@ -9,6 +9,7 @@ using FourmiliereSolution.Model;
 using Microsoft.Win32;
 using System.Xml;
 using System.Windows.Input;
+using FourmiliereSolution.View;
 
 namespace FourmiliereSolution
 {
@@ -350,13 +351,27 @@ namespace FourmiliereSolution
             {
                 SauvegarderFichier();
             }
-            Terrain newTerrain = new Terrain(App.MainVM.Dim);
-            App.MainVM.Statistique = new Statistique(newTerrain);
-            App.MainVM.Terrain = newTerrain;
-            FabriqueGeneral.AjouterFourmiliereAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
-            FabriqueGeneral.AjouterNourritureAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
-            FabriqueGeneral.AjouterNourritureAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
-            DessinePlateau();
+
+            InputForm inputWindow = new InputForm("Saisir une nouvelle dimension entre 10 et 40:", "15");
+
+            if(inputWindow.ShowDialog() == true && inputWindow.Answer.Length > 0)
+            {
+                int newTaille = 0;
+                if(int.TryParse(inputWindow.Answer, out newTaille) == false || newTaille < 10 || newTaille > 40)
+                {
+                    MessageBox.Show("Valeur incorrect", "Nouveau Jeux", MessageBoxButton.OK);
+                    return;
+                }
+                App.MainVM.Dim = newTaille;
+                Terrain newTerrain = new Terrain(App.MainVM.Dim);
+                App.MainVM.Statistique = new Statistique(newTerrain);
+                App.MainVM.Terrain = newTerrain;
+                FabriqueGeneral.AjouterFourmiliereAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
+                FabriqueGeneral.AjouterNourritureAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
+                FabriqueGeneral.AjouterNourritureAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
+                DessinePlateau();
+            }
+
         }
 
         private void btnDetail_Mode(object sender, RoutedEventArgs e)
@@ -431,8 +446,11 @@ namespace FourmiliereSolution
                 cordX++;
             }
 
-            App.MainVM.ActionClick(cordX, cordY);
-            DessinePlateau();
+            if(cordX >= 0 && cordX < App.MainVM.Dim && cordY >= 0 && cordY < App.MainVM.Dim)
+            {
+                App.MainVM.ActionClick(cordX, cordY);
+                DessinePlateau();
+            }
         }
     }
 }

@@ -8,8 +8,8 @@ namespace FourmiliereSolution
 {
     public class AProposViewModel : Observeur
     {
-        public string Copyright { get { return "Machin"; } }
+        public string Copyright { get { return "\n\rCette application est sous aucune licence"; } }
         public string DateApplication { get { return DateTime.Now.ToString();  } }
-        public string Auteur {  get { return "Vincent Chose"; } }
+        public string Auteur {  get { return "\n\rVincent Kocupyr\n\rBaptiste Deléris\n\rRémi Ollivier"; } }
     }
 }
