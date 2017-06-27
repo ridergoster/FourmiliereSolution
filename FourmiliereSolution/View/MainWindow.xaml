@@ -6,32 +6,57 @@
         xmlns:local="clr-namespace:FourmiliereSolution"
         mc:Ignorable="d"
         Title="MainWindow" Height="533.718" Width="817.308">
-    <Window.Resources>
-        <local:OpenAbout x:Key="OpenAbout"/>
-    </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Modifiers="Control"
-                Key="G"
-                Command="{StaticResource OpenAbout}" 
+                Key="P"
+                Command="{Binding APropos}" 
+                CommandParameter="window input binding" />
+        <KeyBinding Modifiers="Control"
+                Key="S"
+                Command="{Binding Sauvegarder}" 
+                CommandParameter="window input binding" />
+        <KeyBinding Modifiers="Control"
+                Key="O"
+                Command="{Binding Ouvrir}" 
+                CommandParameter="window input binding" />
+        <KeyBinding Modifiers="Control"
+                Key="Q"
+                Command="{Binding Quitter}" 
                 CommandParameter="window input binding" />
     </Window.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_Open"/>
                 <MenuItem
-                    Header="_Save"
-                    Click="Sauvegarder_Document"
+                    Header="_Sauvegarger"
+                    HorizontalAlignment="Left"
+                    Width="200"
+                    Command="{Binding Sauvegarder}" 
+                    InputGestureText="Ctrl+S"
+                    />
+                <MenuItem
+                    Header="_Ouvrir"
+                    HorizontalAlignment="Left"
+                    Width="200"
+                    Command="{Binding Ouvrir}" 
+                    InputGestureText="Ctrl+O"
                     />
                 <MenuItem 
                     x:Name="AppAbout" 
-                    Header="_About"  
+                    Header="A _Propos"  
                     HorizontalAlignment="Left"
                     Width="200" 
-                    Command="{StaticResource OpenAbout}" 
-                    InputGestureText="Ctrl+G">
-                </MenuItem>
-                <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="200" />
+                    Command="{Binding APropos}" 
+                    InputGestureText="Ctrl+P"
+                />
+                <MenuItem 
+                    x:Name="AppQuitter" 
+                    Header="_Quitter"  
+                    HorizontalAlignment="Left"
+                    Width="200" 
+                    Command="{Binding Quitter}" 
+                    InputGestureText="Ctrl+Q"
+                />            
             </MenuItem>
         </Menu>
         <Grid ShowGridLines="true" Height="477" VerticalAlignment="Top" Margin="0,0,0,-68" Width="818">

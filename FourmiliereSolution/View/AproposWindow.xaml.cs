@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 namespace FourmiliereSolution
 {
     /// <summary>
-    /// Logique d'interaction pour AproposWindow.xaml
+    /// Logique d'interaction pour AProposWindow.xaml
     /// </summary>
-    public partial class AproposWindow : Window
+    public partial class AProposWindow : Window
     {
-        public AproposWindow()
+        public AProposWindow()
         {
             InitializeComponent();
-            DataContext = new AproposViewModel();
+            DataContext = new AProposViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

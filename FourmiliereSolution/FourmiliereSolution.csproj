@@ -54,10 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="OpenAbout.cs" />
-    <Compile Include="View\AproposViewModel.cs" />
-    <Compile Include="View\AproposWindow.xaml.cs">
-      <DependentUpon>AproposWindow.xaml</DependentUpon>
+    <Compile Include="ActionCommand.cs" />
+    <Compile Include="View\AProposViewModel.cs" />
+    <Compile Include="View\AProposWindow.xaml.cs">
+      <DependentUpon>AProposWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\CaseNormal.cs" />
     <Compile Include="Model\CaseAbstrait.cs" />
@@ -74,7 +74,7 @@
     <Compile Include="Model\StrategieRetourMaison.cs" />
     <Compile Include="Model\Terrain.cs" />
     <Compile Include="Observeur.cs" />
-    <Page Include="View\AproposWindow.xaml">
+    <Page Include="View\AProposWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

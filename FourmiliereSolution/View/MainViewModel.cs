@@ -66,6 +66,58 @@ namespace FourmiliereSolution
             }
         }
 
+        private ActionCommand ouvrir;
+        public ActionCommand Ouvrir
+        {
+            get
+            {
+                return ouvrir;
+            }
+            set
+            {
+                ouvrir = value;
+            }
+        }
+
+        private ActionCommand sauvegarder;
+        public ActionCommand Sauvegarder
+        {
+            get
+            {
+                return sauvegarder;
+            }
+            set
+            {
+                sauvegarder = value;
+            }
+        }
+
+        private ActionCommand quitter;
+        public ActionCommand Quitter
+        {
+            get
+            {
+                return quitter;
+            }
+            set
+            {
+                quitter = value;
+            }
+        }
+
+        private ActionCommand aPropos;
+        public ActionCommand APropos
+        {
+            get
+            {
+                return aPropos;
+            }
+            set
+            {
+                aPropos = value;
+            }
+        }
+
         public bool Runnin { get; private set; }
         public int VitesseExec { get; set; }
 

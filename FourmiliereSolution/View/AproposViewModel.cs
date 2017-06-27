@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FourmiliereSolution
 {
-    public class AproposViewModel : Observeur
+    public class AProposViewModel : Observeur
     {
         public string Copyright { get { return "Machin"; } }
         public string DateApplication { get { return DateTime.Now.ToString();  } }

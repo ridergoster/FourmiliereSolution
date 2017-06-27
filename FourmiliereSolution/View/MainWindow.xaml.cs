@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using FourmiliereSolution.Model;
 using Microsoft.Win32;
+using System.Xml;
 
 namespace FourmiliereSolution
 {
@@ -17,10 +18,15 @@ namespace FourmiliereSolution
     {
         DispatcherTimer dt = new DispatcherTimer();
         Stopwatch sw = new Stopwatch();
+
         public FabriqueGeneral FabriqueGeneral { get; set; } = new FabriqueGeneral();
         public MainWindow()
         {
             InitializeComponent();
+            App.MainVM.Ouvrir = new ActionCommand(OuvrirFichier);
+            App.MainVM.Sauvegarder = new ActionCommand(SauvegarderFichier);
+            App.MainVM.APropos = new ActionCommand(OuvrirAPropos);
+            App.MainVM.Quitter = new ActionCommand(QuitterApp);
             dt.Tick += new EventHandler(redessine_Tick);
             dt.Interval = new TimeSpan(0, 0, 0, 0, 200);
             FabriqueGeneral.AjouterFourmiliereAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
@@ -119,11 +125,14 @@ namespace FourmiliereSolution
             App.MainVM.stop();
         }
 
-        private void Sauvegarder_Document(object sender, RoutedEventArgs e)
-        {
 
-            dt.Stop();
+        private void SauvegarderFichier()
+        {
             App.MainVM.stop();
+            while (App.MainVM.Runnin)
+            {
+
+            }
 
             var MainVMXML = new System.Xml.Linq.XElement("MainVM");
             MainVMXML.Add(new System.Xml.Linq.XElement("Dim", App.MainVM.Dim));
@@ -132,9 +141,9 @@ namespace FourmiliereSolution
             MainVMXML.Add(new System.Xml.Linq.XElement("Runnin", false));
 
             var TerrainXML = new System.Xml.Linq.XElement("Terrain");
-            TerrainXML.Add(new System.Xml.Linq.XElement("NbTours",App.MainVM.Terrain.NbTours));
+            TerrainXML.Add(new System.Xml.Linq.XElement("NbTours", App.MainVM.Terrain.NbTours));
             var CasesXML = new System.Xml.Linq.XElement("Cases");
-            foreach(CaseAbstrait caseAbs in App.MainVM.Terrain.Cases)
+            foreach (CaseAbstrait caseAbs in App.MainVM.Terrain.Cases)
             {
                 var CaseXML = new System.Xml.Linq.XElement("Case");
                 CaseXML.Add(new System.Xml.Linq.XElement("Class", caseAbs.GetType().Name));
@@ -143,7 +152,7 @@ namespace FourmiliereSolution
                 CaseXML.Add(new System.Xml.Linq.XElement("PheromoneMaison", caseAbs.CordY));
                 CaseXML.Add(new System.Xml.Linq.XElement("PheromoneNourriture", caseAbs.CordY));
                 CaseXML.Add(new System.Xml.Linq.XElement("NbTours", caseAbs.CordY));
-                if(caseAbs is CaseNourriture)
+                if (caseAbs is CaseNourriture)
                 {
                     var NourritureXML = new System.Xml.Linq.XElement("Nourriture");
                     NourritureXML.Add(new System.Xml.Linq.XElement("Poids", ((CaseNourriture)caseAbs).Nourriture.Poids));
@@ -157,7 +166,7 @@ namespace FourmiliereSolution
                     CaseXML.Add(FourmiliereXML);
                 }
                 var FourmisXML = new System.Xml.Linq.XElement("Fourmis");
-                foreach(Fourmi fourmi in caseAbs.Fourmis)
+                foreach (Fourmi fourmi in caseAbs.Fourmis)
                 {
                     var FourmiXML = new System.Xml.Linq.XElement("Fourmi");
                     FourmiXML.Add(new System.Xml.Linq.XElement("Vie", fourmi.Vie));
@@ -177,18 +186,158 @@ namespace FourmiliereSolution
 
             var Sauvegarde = new System.Xml.Linq.XDocument(MainVMXML);
 
-            SaveFileDialog sfDialog = new SaveFileDialog();
-            sfDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
-            sfDialog.DefaultExt = "xml";
-            sfDialog.AddExtension = true;
-            sfDialog.Filter = "XML Files|*.xml|All Files|*.*";
-            sfDialog.FilterIndex = 1;
-            if (sfDialog.ShowDialog() == true && sfDialog.FileName.Length > 0)
+            SaveFileDialog SFDialog = new SaveFileDialog();
+            SFDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
+            SFDialog.DefaultExt = "xml";
+            SFDialog.AddExtension = true;
+            SFDialog.Filter = "XML Files|*.xml|All Files|*.*";
+            SFDialog.FilterIndex = 1;
+            if (SFDialog.ShowDialog() == true && SFDialog.FileName.Length > 0)
             {
-                Sauvegarde.Save(sfDialog.FileName);
+                Sauvegarde.Save(SFDialog.FileName);
                 System.Media.SystemSounds.Beep.Play();
                 MessageBox.Show("Fichier Sauvegardé !", "Sauvegarde", MessageBoxButton.OK);
             }
+        }
+        private void OuvrirFichier()
+        {
+            App.MainVM.stop();
+            while (App.MainVM.Runnin)
+            {
+
+            }
+
+            OpenFileDialog OFDialog = new OpenFileDialog();
+            OFDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
+            OFDialog.DefaultExt = "xml";
+            OFDialog.Filter = "XML Files|*.xml|All Files|*.*";
+            OFDialog.FilterIndex = 1;
+            if (OFDialog.ShowDialog() == true && OFDialog.FileName.Length > 0)
+            {
+                // CHARGER LE FICHIER ET VERIFIER SA VALIDITE
+                XmlDocument Chargement = new XmlDocument();
+                Chargement.Load(OFDialog.FileName);
+                XmlNode MainVMXML;
+                if ((MainVMXML = Chargement.SelectSingleNode("MainVM")) == null)
+                {
+                    System.Media.SystemSounds.Beep.Play();
+                    MessageBox.Show("Fichier incompatible !", "Chargement", MessageBoxButton.OK);
+                    return;
+                }
+
+                // RECUPERER DATA DE MAINVM
+                int Dim = int.Parse(MainVMXML.SelectSingleNode("Dim").InnerText);
+                String TitreApplication = MainVMXML.SelectSingleNode("TitreApplication").InnerText;
+                int VitesseExec = int.Parse(MainVMXML.SelectSingleNode("VitesseExec").InnerText);
+                bool Runnin = bool.Parse(MainVMXML.SelectSingleNode("Runnin").InnerText);
+
+                Terrain Terrain = new Terrain(Dim);
+
+                // RECUPERER DATA DE TERRAIN
+                XmlNode TerrainXML = MainVMXML.SelectSingleNode("Terrain");
+                int NbToursTerrain = int.Parse(TerrainXML.SelectSingleNode("NbTours").InnerText);
+                XmlNode CasesXML = TerrainXML.SelectSingleNode("Cases");
+                foreach (XmlNode CaseXML in CasesXML.SelectNodes("Case"))
+                {
+                    CaseAbstrait Case;
+                    String CaseClass = CaseXML.SelectSingleNode("Class").InnerText;
+                    int CordX = int.Parse(CaseXML.SelectSingleNode("CordX").InnerText);
+                    int CordY = int.Parse(CaseXML.SelectSingleNode("CordY").InnerText);
+                    int PheromoneMaison = int.Parse(CaseXML.SelectSingleNode("PheromoneMaison").InnerText);
+                    int PheromoneNourriture = int.Parse(CaseXML.SelectSingleNode("PheromoneNourriture").InnerText);
+                    int NbToursCase = int.Parse(CaseXML.SelectSingleNode("NbTours").InnerText);
+
+                    if (CaseClass == "CaseNourriture")
+                    {
+                        Case = new CaseNourriture(Terrain, CordX, CordY);
+                        int NourriturePoids = int.Parse(CaseXML.SelectSingleNode("Nourriture/Poids").InnerText);
+                        Nourriture Nourriture = new Nourriture(Case, NourriturePoids);
+                        ((CaseNourriture)Case).Nourriture = Nourriture;
+                    }
+                    else if (CaseClass == "CaseFourmiliere")
+                    {
+                        Case = new CaseFourmiliere(Terrain, CordX, CordY);
+                        int NombreNourritures = int.Parse(CaseXML.SelectSingleNode("Fourmiliere/NombreNourritures").InnerText);
+                        int NombreToursFourmiliere = int.Parse(CaseXML.SelectSingleNode("Fourmiliere/NombreTours").InnerText);
+                        Fourmiliere Fourmiliere = new Fourmiliere(Case, 0);
+                        Fourmiliere.NombreNourritures = NombreNourritures;
+                        Fourmiliere.NombreTours = NombreToursFourmiliere;
+                        ((CaseFourmiliere)Case).Fourmiliere = Fourmiliere;
+                    }
+                    else if (CaseClass == "CaseNormal")
+                    {
+                        Case = new CaseNormal(Terrain, CordX, CordY);
+                    }
+                    else
+                    {
+                        System.Media.SystemSounds.Beep.Play();
+                        MessageBox.Show("Erreur au chargement", "Chargement", MessageBoxButton.OK);
+                        return;
+                    }
+                    Case.PheromoneMaison = PheromoneMaison;
+                    Case.PheromoneNourriture = PheromoneNourriture;
+                    Case.NbTours = NbToursCase;
+
+                    XmlNode FourmisXML = CaseXML.SelectSingleNode("Fourmis");
+                    foreach (XmlNode FourmiXML in FourmisXML.SelectNodes("Fourmi"))
+                    {
+                        int Vie = int.Parse(FourmiXML.SelectSingleNode("Vie").InnerText);
+                        String StrategieFourmi = FourmiXML.SelectSingleNode("StrategieFourmi").InnerText;
+                        Fourmi Fourmi = new Fourmi(Case);
+                        Fourmi.Vie = Vie;
+                        if (StrategieFourmi == "StrategieRetourMaison")
+                        {
+                            Fourmi.StrategieFourmi = new StrategieRetourMaison();
+                        }
+                        Case.Fourmis.Add(Fourmi);
+                    }
+                    Terrain.Cases[Case.CordX, Case.CordY] = Case;
+                }
+                Terrain.NbTours = NbToursTerrain;
+
+                XmlNode StatistiqueXML = MainVMXML.SelectSingleNode("Statistique");
+                int NombreFourmis = int.Parse(StatistiqueXML.SelectSingleNode("NombreFourmis").InnerText);
+                int NombreToursStatistique = int.Parse(StatistiqueXML.SelectSingleNode("NombreTours").InnerText);
+
+                Statistique Statistique = new Statistique(Terrain);
+                Statistique.NombreFourmis = NombreFourmis;
+                Statistique.NombreTours = NombreToursStatistique;
+
+                App.MainVM.Dim = Dim;
+                App.MainVM.Terrain = Terrain;
+                App.MainVM.TitreApplication = TitreApplication;
+                App.MainVM.VitesseExec = VitesseExec;
+                App.MainVM.Statistique = Statistique;
+                DessinePlateau();
+                System.Media.SystemSounds.Beep.Play();
+                MessageBox.Show("Fichier Chargé !", "Chargement", MessageBoxButton.OK);
+            }
+        }
+
+        private void OuvrirAPropos()
+        {
+            AProposWindow AProposWindow = new AProposWindow();
+            AProposWindow.ShowDialog();
+        }
+        
+        private void QuitterApp()
+        {
+            App.MainVM.stop();
+            while (App.MainVM.Runnin)
+            {
+
+            }
+            System.Media.SystemSounds.Beep.Play();
+            MessageBoxResult result = MessageBox.Show("Voulez-vous sauvegarder ?", "Quitter", MessageBoxButton.YesNoCancel);
+            if(result == MessageBoxResult.Cancel)
+            {
+                return;
+            }
+            else if(result == MessageBoxResult.Yes)
+            {
+                SauvegarderFichier();
+            } 
+            App.Current.Shutdown();
         }
     }
 }
