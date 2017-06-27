@@ -399,6 +399,7 @@ namespace FourmiliereSolution
         private void CaseDetail(int CordX, int CordY)
         {
             App.MainVM.Statistique.CaseSelect = App.MainVM.Terrain.Cases[CordX, CordY];
+            App.MainVM.Statistique.MiseAjour();
         }
 
         private void clickTerrain(object sender, System.Windows.Input.MouseButtonEventArgs e)

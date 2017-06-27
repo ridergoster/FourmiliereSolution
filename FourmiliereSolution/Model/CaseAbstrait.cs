@@ -1,24 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FourmiliereSolution.Model
 {
-    public abstract class CaseAbstrait
+    public abstract class CaseAbstrait: Observeur
     {
         public int CordX { get; set; }
         public int CordY { get; set; }
         // CONTIENT UNE REF SUR LE TERRAIN
         public Terrain RefTerrain { get; set; }
         // CONTIENT UN NB DE PHEROMONE "MAISON"
-        public int PheromoneMaison { get; set; } = 0;
-        public int PheromoneNourriture { get; set; } = 0;
-        // CONTIENT UN NB DE PHEROMONE "NOURRITURE"
+        private int pheromoneMaison = 0;
+        public int PheromoneMaison {
+            get => pheromoneMaison;
+            set {
+                pheromoneMaison = value;
+                OnPropertyChanged("PheromoneMaison");
+            }
+        }
+        private int pheromoneNourriture = 0;
+        public int PheromoneNourriture
+        {
+            get => pheromoneNourriture;
+            set
+            {
+                pheromoneNourriture = value;
+                OnPropertyChanged("PheromoneNourriture");
+            }
+        }        // CONTIENT UN NB DE PHEROMONE "NOURRITURE"
         public int NbTours { get; set; } = 0;
         // CONTIENT UN ARRAY DE FOURMI SUR LA CASE
-        public List<Fourmi> Fourmis { get; set; } = new List<Fourmi>();
+        private ObservableCollection<Fourmi> fourmis = new ObservableCollection<Fourmi>();
+        public ObservableCollection<Fourmi> Fourmis
+        {
+            get => fourmis;
+            set
+            {
+                fourmis = value;
+                OnPropertyChanged("Fourmis");
+            }
+        }
         public List<Fourmi> FourmisEnAjout { get; set; } = new List<Fourmi>();
         public List<Fourmi> FourmisASupprimer { get; set; } = new List<Fourmi>();
 
@@ -73,13 +98,18 @@ namespace FourmiliereSolution.Model
         }
         public void AjouterFourmi()
         {
-            Fourmis.AddRange(FourmisEnAjout);
+            foreach(Fourmi Fourmi in FourmisEnAjout)
+            {
+                Fourmis.Add(Fourmi);
+            }
             FourmisEnAjout.Clear();
         }
         public void SupprimerFourmi()
         {
-
-            Fourmis.RemoveAll(fourmi => FourmisASupprimer.Contains(fourmi));
+            foreach (Fourmi Fourmi in FourmisASupprimer)
+            {
+                Fourmis.Remove(Fourmi);
+            }
             FourmisASupprimer.Clear();
         }
 

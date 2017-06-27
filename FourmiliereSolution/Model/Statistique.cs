@@ -31,6 +31,17 @@ namespace FourmiliereSolution.Model
             }
         }
 
+        private int nombreNourriture;
+        public int NombreNourriture
+        {
+            get => nombreNourriture;
+            set
+            {
+                nombreNourriture = value;
+                OnPropertyChanged("NombreNourriture");
+            }
+        }
+
         private CaseAbstrait caseSelect;
 
         public CaseAbstrait CaseSelect
@@ -60,6 +71,27 @@ namespace FourmiliereSolution.Model
             NombreFourmis = nbFourmis;
 
             NombreTours = RefTerrain.NbTours;
+
+            if (CaseSelect != null)
+            {
+                int nbNourriture = 0;
+                if(CaseSelect is CaseNourriture)
+                {
+                    nbNourriture = ((CaseNourriture)CaseSelect).Nourriture.Poids;
+                }
+                else if(CaseSelect is CaseFourmiliere)
+                {
+                    nbNourriture = ((CaseFourmiliere)CaseSelect).Fourmiliere.NombreNourritures;
+                }
+                foreach(Fourmi Fourmi in CaseSelect.Fourmis)
+                {
+                    if(Fourmi.StrategieFourmi is StrategieRetourMaison)
+                    {
+                        nbNourriture++;
+                    }
+                }
+                NombreNourriture = nbNourriture;
+            }
         }
     }
 }

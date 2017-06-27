@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FourmiliereSolution"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="840">
+        Title="MainWindow" Height="550" Width="860">
     <Window.InputBindings>
         <KeyBinding Modifiers="Control"
                 Key="P"
@@ -70,10 +70,10 @@
                 />            
             </MenuItem>
         </Menu>
-        <Grid ShowGridLines="true" Height="477" VerticalAlignment="Top" Margin="0,0,0,-68" Width="818">
+        <Grid ShowGridLines="true">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="4*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -86,33 +86,44 @@
             <TextBlock Text="{Binding Statistique.NombreFourmis, StringFormat='{}{0} Fourmis'}" Grid.Row="0" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding Statistique.NombreTours, StringFormat='{}{0} tours'}" Grid.Row="0" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <ListBox 
-            Grid.Row="1"
-            Grid.Column="0"
-            ItemsSource="{Binding FourmisList}" 
-            FontSize="14" 
-            HorizontalContentAlignment="Stretch"
-            Background="{x:Null}"
-            SelectedItem="{Binding FourmiSelect}">
-                <ListBox.InputBindings>
-                    <KeyBinding Key="Delete" Command="{Binding removeFourmis}"></KeyBinding>
-                </ListBox.InputBindings>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="1" Text="{Binding Nom}" HorizontalAlignment="Left"/>
-                            <!--<TextBlock Grid.Column="2" Text="{Binding EtapesList.Count}" HorizontalAlignment="Center"/>-->
-                            <TextBlock Grid.Column="2" Text="{Binding Health}" HorizontalAlignment="Center"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <Grid Name="CaseDetailGrid" Grid.Column="0" Grid.Row="1" ShowGridLines="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Cord X" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Statistique.CaseSelect.CordX}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Cord Y" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Statistique.CaseSelect.CordY}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Pheromone"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Maison"/>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Statistique.CaseSelect.PheromoneMaison}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <StackPanel Grid.Column="0" Grid.Row="3" VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Pheromone"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Nourriture"/>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Statistique.CaseSelect.PheromoneNourriture}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <StackPanel Grid.Column="0" Grid.Row="4" VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Nombre"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Fourmis"/>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Statistique.CaseSelect.Fourmis.Count}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="Nourriture" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Statistique.NombreNourriture}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
+            </Grid>
+            
             <Grid Name="Plateau" Grid.Column="1" Grid.Row="1" Background="Transparent" PreviewMouseLeftButtonDown="clickTerrain"/>
 
             <Grid Grid.Row="1" Grid.Column="2">
