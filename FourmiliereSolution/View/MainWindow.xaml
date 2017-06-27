@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FourmiliereSolution"
         mc:Ignorable="d"
-        Title="MainWindow" Height="533.718" Width="817.308">
+        Title="MainWindow" Height="550" Width="840">
     <Window.InputBindings>
         <KeyBinding Modifiers="Control"
                 Key="P"
@@ -102,7 +102,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <Grid Name="Plateau" Grid.Column="1" Grid.Row="1" />
+            <Grid Name="Plateau" Grid.Column="1" Grid.Row="1" Background="Transparent" PreviewMouseLeftButtonDown="clickTerrain"/>
 
             <Grid Grid.Row="1" Grid.Column="2">
                 <Grid.ColumnDefinitions>
@@ -120,30 +120,47 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" FontSize="14"  Content="Tour Suivant" Name="btnNext" Click="btnNext_Click"/>
-                <Button Grid.Column="1" FontSize="14"  Content="Avance..." Name="btnAvance" Click="btnAvance_Click"/>
-                <Slider Grid.Column="2" Minimum="100" Maximum="2000" Value="{Binding VitesseExec}" />
-                <Button Grid.Column="3" FontSize="14"  Content="Stop" Name="btnStop" Click="btnStop_Click"/>
+                <Button Grid.Column="0" FontSize="14"  Content="Tour Suivant" Name="btnNext" Click="btnNext_Click" Margin="5"/>
+                <Button Grid.Column="1" FontSize="14"  Content="Execution" Name="btnAvance" Click="btnAvance_Click" Margin="5"/>
+                <Slider Grid.Column="2" Minimum="100" Maximum="2000" Value="{Binding VitesseExec}" Margin="5"/>
+                <Button Grid.Column="3" FontSize="14"  Content="Stop" Name="btnStop" Click="btnStop_Click" Margin="5"/>
             </Grid>
             <Button
-            Grid.Row="2"
-            Grid.Column="0"
-            Content="Add Fourmi"
-            FontSize="14"
-            Name="btnAdd"
-            Click="btnAdd_Click"
-            Margin="5"
+                Grid.Row="2"
+                Grid.Column="0"
+                Content="Mode Fourmi"
+                FontSize="14"
+                Name="btnFourmi"
+                Click="btnFourmi_Mode"
+                Margin="5"
             />
             <Button
-            Grid.Row="3"
-            Grid.Column="0"
-            FontSize="14"
-            Name="btnRemove"
-            Margin="5" Click="btnRemove_Click">
-                <Button.Content>
-                    <TextBlock Text="{Binding FourmiSelect.Nom, StringFormat='{}Delete {0}'}"/>
-                </Button.Content>
-            </Button>
+                Grid.Row="3"
+                Grid.Column="0"
+                Content="Mode Nourriture"
+                FontSize="14"
+                Name="btnNourriture"
+                Click="btnNourriture_Mode"
+                Margin="5"
+            />
+            <Button
+                Grid.Row="2"
+                Grid.Column="2"
+                Content="Mode Clean"
+                FontSize="14"
+                Name="btnClean"
+                Click="btnClean_Mode"
+                Margin="5"
+            />
+            <Button
+                Grid.Row="3"
+                Grid.Column="2"
+                Content="Mode Detail"
+                FontSize="14"
+                Name="btnDetail"
+                Click="btnDetail_Mode"
+                Margin="5"
+            />
         </Grid>
     </DockPanel>
 </Window>

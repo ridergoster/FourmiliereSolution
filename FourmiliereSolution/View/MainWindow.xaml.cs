@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using FourmiliereSolution.Model;
 using Microsoft.Win32;
 using System.Xml;
+using System.Windows.Input;
 
 namespace FourmiliereSolution
 {
@@ -27,6 +28,7 @@ namespace FourmiliereSolution
             App.MainVM.Sauvegarder = new ActionCommand(SauvegarderFichier);
             App.MainVM.APropos = new ActionCommand(OuvrirAPropos);
             App.MainVM.Quitter = new ActionCommand(QuitterApp);
+            App.MainVM.ActionClick = CaseDetail;
             dt.Tick += new EventHandler(redessine_Tick);
             dt.Interval = new TimeSpan(0, 0, 0, 0, 200);
             FabriqueGeneral.AjouterFourmiliereAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
@@ -96,16 +98,6 @@ namespace FourmiliereSolution
             }
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            DessinePlateau();
-        }
-
-        private void btnRemove_Click(object sender, RoutedEventArgs e)
-        {
-            DessinePlateau();
-        }
-
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
             App.MainVM.tourSuivant();
@@ -124,7 +116,6 @@ namespace FourmiliereSolution
             dt.Stop();
             App.MainVM.stop();
         }
-
 
         private void SauvegarderFichier()
         {
@@ -338,6 +329,73 @@ namespace FourmiliereSolution
                 SauvegarderFichier();
             } 
             App.Current.Shutdown();
+        }
+
+        private void btnDetail_Mode(object sender, RoutedEventArgs e)
+        {
+            App.MainVM.ActionClick = CaseDetail;
+        }
+
+        private void btnClean_Mode(object sender, RoutedEventArgs e)
+        {
+            App.MainVM.ActionClick = CleanCase;
+        }
+
+        private void btnNourriture_Mode(object sender, RoutedEventArgs e)
+        {
+            App.MainVM.ActionClick = AjouterNourriture;
+        }
+
+        private void btnFourmi_Mode(object sender, RoutedEventArgs e)
+        {
+            App.MainVM.ActionClick = AjouterFourmi;
+        }
+
+        private void AjouterNourriture(int CordX, int CordY)
+        {
+            FabriqueGeneral.AjouterNourriture(App.MainVM.Terrain, CordX, CordY, 10);
+        }
+
+        private void AjouterFourmi(int CordX, int CordY)
+        {
+            App.MainVM.Terrain.Cases[CordX, CordY].Fourmis.Add(new Fourmi(App.MainVM.Terrain.Cases[CordX, CordY]));
+        }
+
+        private void CleanCase(int CordX, int CordY)
+        {
+            CaseNormal newCase = App.MainVM.Terrain.Cases[CordX, CordY].AdapteurNormal();
+            App.MainVM.Terrain.Cases[CordX, CordY] = newCase;
+        }
+
+        private void CaseDetail(int CordX, int CordY)
+        {
+
+        }
+
+        private void clickTerrain(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var point = Mouse.GetPosition(Plateau);
+            int cordX = 0;
+            int cordY = 0;
+            double totalX = 0.0;
+            double totalY = 0.0;
+
+            foreach(var rowDef in Plateau.RowDefinitions)
+            {
+                totalY += rowDef.ActualHeight;
+                if (totalY >= point.Y) break;
+                cordY++;
+            }
+
+            foreach (var colDef in Plateau.ColumnDefinitions)
+            {
+                totalX += colDef.ActualWidth;
+                if (totalX >= point.X) break;
+                cordX++;
+            }
+
+            App.MainVM.ActionClick(cordX, cordY);
+            DessinePlateau();
         }
     }
 }

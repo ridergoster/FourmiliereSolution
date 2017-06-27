@@ -118,6 +118,19 @@ namespace FourmiliereSolution
             }
         }
 
+        private Action<int,int> actionClick;
+        public Action<int,int> ActionClick
+        {
+            get
+            {
+                return actionClick;
+            }
+            set
+            {
+                actionClick = value;
+            }
+        }
+
         public bool Runnin { get; private set; }
         public int VitesseExec { get; set; }
 
