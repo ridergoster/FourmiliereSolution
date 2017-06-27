@@ -54,18 +54,6 @@ namespace FourmiliereSolution
             }
         }
 
-        private ObservableCollection<Fourmi> fourmisList;
-
-        public ObservableCollection<Fourmi> FourmisList
-        {
-            get { return fourmisList; }
-            set
-            {
-                fourmisList = value;
-                OnPropertyChanged("FourmisList");
-            }
-        }
-
         private CaseAbstrait caseSelect;
 
         public CaseAbstrait CaseSelect

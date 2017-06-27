@@ -11,9 +11,9 @@ namespace FourmiliereSolution.Model
         // CONTIENT REFERENCE SUR LA CASE
         private CaseAbstrait RefCase { get; set; }
         // CONTIENT UN NBNOURRITURE RECOLTE
-        private int NombreNourritures { get; set; } = 0;
+        public int NombreNourritures { get; set; } = 0;
         // CONTIENT UN NBTOUR
-        private int NombreTours { get; set; } = 0;
+        public int NombreTours { get; set; } = 0;
 
         public Fourmiliere(CaseAbstrait _RefCase, int fourmisDefaut)
         {

@@ -15,10 +15,8 @@ namespace FourmiliereSolution.Model
         // CONTIENT UN NB DE PHEROMONE "MAISON"
         public int PheromoneMaison { get; set; } = 0;
         public int PheromoneNourriture { get; set; } = 0;
-        public int FacteurPheromoneMaison { get; set; } = 4;
-        public int FacteurPheromoneNourriture { get; set; } = 6;
         // CONTIENT UN NB DE PHEROMONE "NOURRITURE"
-        public int nbTours { get; set; } = 0;
+        public int NbTours { get; set; } = 0;
         // CONTIENT UN ARRAY DE FOURMI SUR LA CASE
         public List<Fourmi> Fourmis { get; set; } = new List<Fourmi>();
         public List<Fourmi> FourmisEnAjout { get; set; } = new List<Fourmi>();
@@ -117,7 +115,7 @@ namespace FourmiliereSolution.Model
         }
         public virtual void MiseAjour()
         {
-            nbTours++;
+            NbTours++;
             foreach(Fourmi fourmi in Fourmis)
             {
                 fourmi.MiseAjour();
@@ -129,8 +127,6 @@ namespace FourmiliereSolution.Model
         public CaseNormal AdapteurNormal()
         {
             CaseNormal CaseNormal = new CaseNormal(this.RefTerrain, this.CordX, this.CordY);
-            CaseNormal.FacteurPheromoneMaison = this.FacteurPheromoneMaison;
-            CaseNormal.FacteurPheromoneNourriture = this.FacteurPheromoneNourriture;
             CaseNormal.PheromoneMaison = this.PheromoneMaison;
             CaseNormal.PheromoneNourriture = this.PheromoneNourriture;
             CaseNormal.Fourmis = this.Fourmis;
@@ -138,15 +134,13 @@ namespace FourmiliereSolution.Model
             CaseNormal.FourmisEnAjout = this.FourmisEnAjout;
             foreach (Fourmi fourmi in CaseNormal.Fourmis) fourmi.RefCase = CaseNormal;
             foreach (Fourmi fourmi in CaseNormal.FourmisEnAjout) fourmi.RefCase = CaseNormal;
-            CaseNormal.nbTours = this.nbTours;
+            CaseNormal.NbTours = this.NbTours;
             return CaseNormal;
         }
 
         public CaseNourriture AdapteurNourriture(int poids)
         {
             CaseNourriture CaseNourriture = new CaseNourriture(this.RefTerrain, this.CordX, this.CordY);
-            CaseNourriture.FacteurPheromoneMaison = this.FacteurPheromoneMaison;
-            CaseNourriture.FacteurPheromoneNourriture = this.FacteurPheromoneNourriture;
             CaseNourriture.PheromoneMaison = this.PheromoneMaison;
             CaseNourriture.PheromoneNourriture = this.PheromoneNourriture;
             CaseNourriture.Fourmis = this.Fourmis;
@@ -154,7 +148,7 @@ namespace FourmiliereSolution.Model
             CaseNourriture.FourmisEnAjout = this.FourmisEnAjout;
             foreach (Fourmi fourmi in CaseNourriture.Fourmis) fourmi.RefCase = CaseNourriture;
             foreach (Fourmi fourmi in CaseNourriture.FourmisEnAjout) fourmi.RefCase = CaseNourriture;
-            CaseNourriture.nbTours = this.nbTours;
+            CaseNourriture.NbTours = this.NbTours;
             CaseNourriture.Nourriture = new Nourriture(CaseNourriture, poids);
             return CaseNourriture;
         }
@@ -162,8 +156,6 @@ namespace FourmiliereSolution.Model
         public CaseFourmiliere AdapteurFourmiliere(int nbFourmis)
         {
             CaseFourmiliere CaseFourmiliere = new CaseFourmiliere(this.RefTerrain, this.CordX, this.CordY);
-            CaseFourmiliere.FacteurPheromoneMaison = this.FacteurPheromoneMaison;
-            CaseFourmiliere.FacteurPheromoneNourriture = this.FacteurPheromoneNourriture;
             CaseFourmiliere.PheromoneMaison = this.PheromoneMaison;
             CaseFourmiliere.PheromoneNourriture = this.PheromoneNourriture;
             CaseFourmiliere.Fourmis = this.Fourmis;
@@ -171,7 +163,7 @@ namespace FourmiliereSolution.Model
             CaseFourmiliere.FourmisEnAjout = this.FourmisEnAjout;
             foreach (Fourmi fourmi in CaseFourmiliere.Fourmis) fourmi.RefCase = CaseFourmiliere;
             foreach (Fourmi fourmi in CaseFourmiliere.FourmisEnAjout) fourmi.RefCase = CaseFourmiliere;
-            CaseFourmiliere.nbTours = this.nbTours;
+            CaseFourmiliere.NbTours = this.NbTours;
             CaseFourmiliere.Fourmiliere = new Fourmiliere(CaseFourmiliere, nbFourmis);
             return CaseFourmiliere;
         }

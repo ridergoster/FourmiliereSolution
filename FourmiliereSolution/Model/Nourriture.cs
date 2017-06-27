@@ -11,7 +11,7 @@ namespace FourmiliereSolution.Model
         // CONTIENT REFERENCE SUR LA CASE
         private CaseAbstrait RefCase { get; set; }
         // CONTIENT UN POIDS (x fois que des fourmis peut ramasser la nourriture avant d'être détruit)
-        private int Poids { get; set; }
+        public int Poids { get; set; }
 
         public Nourriture(CaseAbstrait _RefCase, int _Poids)
         {
