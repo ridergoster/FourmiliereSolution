@@ -54,18 +54,6 @@ namespace FourmiliereSolution
             }
         }
 
-        private CaseAbstrait caseSelect;
-
-        public CaseAbstrait CaseSelect
-        {
-            get { return caseSelect; }
-            set
-            {
-                caseSelect = value;
-                OnPropertyChanged("CaseSelect");
-            }
-        }
-
         private ActionCommand ouvrir;
         public ActionCommand Ouvrir
         {
@@ -115,6 +103,19 @@ namespace FourmiliereSolution
             set
             {
                 aPropos = value;
+            }
+        }
+
+        private ActionCommand nouveau;
+        public ActionCommand Nouveau
+        {
+            get
+            {
+                return nouveau;
+            }
+            set
+            {
+                nouveau = value;
             }
         }
 

@@ -20,6 +20,10 @@
                 Command="{Binding Ouvrir}" 
                 CommandParameter="window input binding" />
         <KeyBinding Modifiers="Control"
+                Key="N"
+                Command="{Binding Nouveau}" 
+                CommandParameter="window input binding" />
+        <KeyBinding Modifiers="Control"
                 Key="Q"
                 Command="{Binding Quitter}" 
                 CommandParameter="window input binding" />
@@ -40,6 +44,13 @@
                     Width="200"
                     Command="{Binding Ouvrir}" 
                     InputGestureText="Ctrl+O"
+                    />
+                <MenuItem
+                    Header="_Nouveau"
+                    HorizontalAlignment="Left"
+                    Width="200"
+                    Command="{Binding Nouveau}" 
+                    InputGestureText="Ctrl+N"
                     />
                 <MenuItem 
                     x:Name="AppAbout" 

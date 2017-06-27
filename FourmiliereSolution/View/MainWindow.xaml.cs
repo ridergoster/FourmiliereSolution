@@ -28,6 +28,7 @@ namespace FourmiliereSolution
             App.MainVM.Sauvegarder = new ActionCommand(SauvegarderFichier);
             App.MainVM.APropos = new ActionCommand(OuvrirAPropos);
             App.MainVM.Quitter = new ActionCommand(QuitterApp);
+            App.MainVM.Nouveau = new ActionCommand(NouvelleApp);
             App.MainVM.ActionClick = CaseDetail;
             dt.Tick += new EventHandler(redessine_Tick);
             dt.Interval = new TimeSpan(0, 0, 0, 0, 200);
@@ -46,6 +47,7 @@ namespace FourmiliereSolution
 
         private void DessinePlateau()
         {
+            App.MainVM.Statistique.MiseAjour();
             Plateau.ColumnDefinitions.Clear();
             Plateau.RowDefinitions.Clear();
             Plateau.Children.Clear();
@@ -331,6 +333,32 @@ namespace FourmiliereSolution
             App.Current.Shutdown();
         }
 
+        private void NouvelleApp()
+        {
+            App.MainVM.stop();
+            while (App.MainVM.Runnin)
+            {
+
+            }
+            System.Media.SystemSounds.Beep.Play();
+            MessageBoxResult result = MessageBox.Show("Voulez-vous sauvegarder ?", "Nouveau Jeux", MessageBoxButton.YesNoCancel);
+            if (result == MessageBoxResult.Cancel)
+            {
+                return;
+            }
+            else if (result == MessageBoxResult.Yes)
+            {
+                SauvegarderFichier();
+            }
+            Terrain newTerrain = new Terrain(App.MainVM.Dim);
+            App.MainVM.Statistique = new Statistique(newTerrain);
+            App.MainVM.Terrain = newTerrain;
+            FabriqueGeneral.AjouterFourmiliereAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
+            FabriqueGeneral.AjouterNourritureAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
+            FabriqueGeneral.AjouterNourritureAuHasard(App.MainVM.Terrain, App.MainVM.Dim, 10);
+            DessinePlateau();
+        }
+
         private void btnDetail_Mode(object sender, RoutedEventArgs e)
         {
             App.MainVM.ActionClick = CaseDetail;
@@ -364,16 +392,24 @@ namespace FourmiliereSolution
         private void CleanCase(int CordX, int CordY)
         {
             CaseNormal newCase = App.MainVM.Terrain.Cases[CordX, CordY].AdapteurNormal();
+            newCase.Fourmis.Clear();
             App.MainVM.Terrain.Cases[CordX, CordY] = newCase;
         }
 
         private void CaseDetail(int CordX, int CordY)
         {
-
+            App.MainVM.Statistique.CaseSelect = App.MainVM.Terrain.Cases[CordX, CordY];
         }
 
         private void clickTerrain(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+
+            App.MainVM.stop();
+            while (App.MainVM.Runnin)
+            {
+
+            }
+
             var point = Mouse.GetPosition(Plateau);
             int cordX = 0;
             int cordY = 0;

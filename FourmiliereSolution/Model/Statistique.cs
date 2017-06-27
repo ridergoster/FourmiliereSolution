@@ -31,6 +31,18 @@ namespace FourmiliereSolution.Model
             }
         }
 
+        private CaseAbstrait caseSelect;
+
+        public CaseAbstrait CaseSelect
+        {
+            get { return caseSelect; }
+            set
+            {
+                caseSelect = value;
+                OnPropertyChanged("CaseSelect");
+            }
+        }
+
         public Terrain RefTerrain { get; set; }
   
         public Statistique(Terrain _refTerrain)
