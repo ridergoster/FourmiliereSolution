@@ -68,8 +68,10 @@ namespace FourmiliereSolution
             foreach(CaseAbstrait refCase in App.MainVM.Terrain.Cases)
             {
                 Image img = new Image();
-                Border bck = new Border();
-                bck.Background = Brushes.White;
+                Image fourmiImg = new Image();
+                Border border = new Border();
+                border.Background = Brushes.White;
+
                 if (refCase.ContientFourmiliere())
                 {
                     img.Source = new BitmapImage(new Uri("/Ressource/maison.png", UriKind.Relative));
@@ -78,30 +80,40 @@ namespace FourmiliereSolution
                 {
                     img.Source = new BitmapImage(new Uri("/Ressource/nourriture.png", UriKind.Relative));
                 }
+
                 if (refCase.ContientFourmis())
                 {
-                    img.Source = new BitmapImage(new Uri("/Ressource/fourmi.png", UriKind.Relative));
+                    fourmiImg.Source = new BitmapImage(new Uri("/Ressource/fourmi.png", UriKind.Relative));
                     foreach (Model.Fourmi fourmi in refCase.Fourmis)
                     {
                         if (fourmi.StrategieFourmi is StrategieRetourMaison)
                         {
-                            img.Source = new BitmapImage(new Uri("/Ressource/fourmi_maison.png", UriKind.Relative));
+                            fourmiImg.Source = new BitmapImage(new Uri("/Ressource/fourmi_maison.png", UriKind.Relative));
                             break;
                         }
                     }
                 }
+
                 if (refCase.PheromoneMaison > 0)
                 {
-                    bck.Background = Brushes.LightGreen; 
+                    border.Background = Brushes.LightGreen; 
                 }
-                if (refCase.PheromoneNourriture > 0)
+                else if (refCase.PheromoneNourriture > 0)
                 {
-                    bck.Background = Brushes.LightSalmon;
+                    border.Background = Brushes.LightSalmon;
                 }
-                bck.Child = img;
-                Plateau.Children.Add(bck);
-                Grid.SetColumn(bck, refCase.CordX);
-                Grid.SetRow(bck, refCase.CordY);
+                if (refCase == App.MainVM.Statistique.CaseSelect)
+                {
+                    border.BorderBrush = Brushes.Black;
+                    border.BorderThickness = new Thickness(2);
+                }
+                border.Child = img;
+                Plateau.Children.Add(border);
+                Plateau.Children.Add(fourmiImg);
+                Grid.SetColumn(border, refCase.CordX);
+                Grid.SetRow(border, refCase.CordY);
+                Grid.SetColumn(fourmiImg, refCase.CordX);
+                Grid.SetRow(fourmiImg, refCase.CordY);
             }
         }
 
@@ -147,9 +159,9 @@ namespace FourmiliereSolution
                 CaseXML.Add(new System.Xml.Linq.XElement("Class", caseAbs.GetType().Name));
                 CaseXML.Add(new System.Xml.Linq.XElement("CordX", caseAbs.CordX));
                 CaseXML.Add(new System.Xml.Linq.XElement("CordY", caseAbs.CordY));
-                CaseXML.Add(new System.Xml.Linq.XElement("PheromoneMaison", caseAbs.CordY));
-                CaseXML.Add(new System.Xml.Linq.XElement("PheromoneNourriture", caseAbs.CordY));
-                CaseXML.Add(new System.Xml.Linq.XElement("NbTours", caseAbs.CordY));
+                CaseXML.Add(new System.Xml.Linq.XElement("PheromoneMaison", caseAbs.PheromoneMaison));
+                CaseXML.Add(new System.Xml.Linq.XElement("PheromoneNourriture", caseAbs.PheromoneNourriture));
+                CaseXML.Add(new System.Xml.Linq.XElement("NbTours", caseAbs.NbTours));
                 if (caseAbs is CaseNourriture)
                 {
                     var NourritureXML = new System.Xml.Linq.XElement("Nourriture");
