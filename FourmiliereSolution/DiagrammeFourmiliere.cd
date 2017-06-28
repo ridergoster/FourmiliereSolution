@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FourmiliereSolution.Model.CaseAbstrait" Collapsed="true">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAICAAEIBAGAQAAAICCBAIAAAEgEAIBIQQAghMAAAI=</HashCode>
+      <FileName>Model\CaseAbstrait.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.Model.CaseFourmiliere" Collapsed="true">
+    <Position X="3.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACBAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CaseFourmiliere.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.Model.CaseNormal" Collapsed="true">
+    <Position X="1.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CaseNormal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.Model.CaseNourriture" Collapsed="true">
+    <Position X="5.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAACBAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CaseNourriture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.Model.FabriqueGeneral" Collapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgQAAAAAAAAAAAAAAAAAAAAKAAQAAABAAAA=</HashCode>
+      <FileName>Model\FabriqueGeneral.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.Model.Fourmi" Collapsed="true">
+    <Position X="1.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAIBABAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Fourmi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.Model.Terrain" Collapsed="true">
+    <Position X="3.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQgAAAAAAAABAAEAAAAAEIAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Terrain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.Model.Fourmiliere" Collapsed="true">
+    <Position X="3.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgAAAAAAAAAAAABAAAAAAACAAIAAAAAAgAAgA=</HashCode>
+      <FileName>Model\Fourmiliere.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.Model.Nourriture" Collapsed="true">
+    <Position X="5.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAQAABAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Nourriture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.Model.Statistique" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAoAAAAAAAAAAAAABAABAAQAAAAAAAACAABAAgAIQA=</HashCode>
+      <FileName>Model\Statistique.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.Model.StrategieRechercheNourriture" Collapsed="true">
+    <Position X="1.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\StrategieRechercheNourriture.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FourmiliereSolution.Model.StrategieRetourMaison" Collapsed="true">
+    <Position X="3.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAQAAAAAABAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\StrategieRetourMaison.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FourmiliereSolution.Observeur" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Observeur.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FourmiliereSolution.ActionCommand" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ActionCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FourmiliereSolution.AProposViewModel" Collapsed="true">
+    <Position X="7" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAABAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\AProposViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FourmiliereSolution.MainViewModel" Collapsed="true">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAIAAICAAACogACIqhAACAAAiAEAEAGAIBABAAAQ=</HashCode>
+      <FileName>View\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="FourmiliereSolution.Model.StrategieFourmi" Collapsed="true">
+    <Position X="1.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\StrategieFourmi.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
