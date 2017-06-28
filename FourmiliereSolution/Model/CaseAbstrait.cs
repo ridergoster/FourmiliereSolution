@@ -54,38 +54,24 @@ namespace FourmiliereSolution.Model
             CordY = _cordY;
         }
 
-        public void AjouterPheromoneMaison(int value)
+        public void AjouterPheromoneMaison(int valeur)
         {
-            PheromoneMaison += value;
+            PheromoneMaison += valeur;
         }
 
         public void SupprimerPheromoneMaison(int valeur)
         {
-            if (PheromoneMaison > valeur)
-            {
-                PheromoneMaison -= valeur;
-            }
-            else
-            {
-                PheromoneMaison = 0;
-            } 
+            PheromoneMaison = PheromoneMaison > valeur ? PheromoneMaison - valeur : 0;
         }
 
-        public void AjouterPheromoneNourriture(int value)
+        public void AjouterPheromoneNourriture(int valeur)
         {
-            PheromoneNourriture += value;
+            PheromoneNourriture += valeur;
         }
 
         public void SupprimerPheromoneNourriture(int valeur)
         {
-            if (PheromoneNourriture > valeur)
-            {
-                PheromoneNourriture -= valeur;
-            }
-            else
-            {
-                PheromoneNourriture = 0;
-            }
+            PheromoneNourriture = PheromoneNourriture > valeur ? PheromoneNourriture - valeur : 0;
         }
 
         public void AjouterASupprimerFourmi(Fourmi NouvelleFourmi)
@@ -148,10 +134,16 @@ namespace FourmiliereSolution.Model
             NbTours++;
             foreach(Fourmi fourmi in Fourmis)
             {
-                fourmi.MiseAjour();
+                fourmi.RefCase = this;
+                if (fourmi.Vie == 0)
+                {
+                    FourmisASupprimer.Add(fourmi);
+                }
+                else
+                {
+                    fourmi.MiseAjour();
+                }
             }
-            //SupprimerPheromoneMaison(1);
-            //SupprimerPheromoneNourriture(1);
         }
 
         public CaseNormal AdapteurNormal()

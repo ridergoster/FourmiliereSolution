@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using System.Xml;
 using System.Windows.Input;
 using FourmiliereSolution.View;
+using System.Windows.Media;
 
 namespace FourmiliereSolution
 {
@@ -66,25 +67,19 @@ namespace FourmiliereSolution
 
             foreach(CaseAbstrait refCase in App.MainVM.Terrain.Cases)
             {
-                if(refCase.ContientFourmiliere())
+                Image img = new Image();
+                Border bck = new Border();
+                bck.Background = Brushes.White;
+                if (refCase.ContientFourmiliere())
                 {
-                    Image img = new Image();
                     img.Source = new BitmapImage(new Uri("/Ressource/maison.png", UriKind.Relative));
-                    Plateau.Children.Add(img);
-                    Grid.SetColumn(img, refCase.CordX);
-                    Grid.SetRow(img, refCase.CordY);
                 }
                 else if (refCase.ContientNourriture())
                 {
-                    Image img = new Image();
                     img.Source = new BitmapImage(new Uri("/Ressource/nourriture.png", UriKind.Relative));
-                    Plateau.Children.Add(img);
-                    Grid.SetColumn(img, refCase.CordX);
-                    Grid.SetRow(img, refCase.CordY);
                 }
                 if (refCase.ContientFourmis())
                 {
-                    Image img = new Image();
                     img.Source = new BitmapImage(new Uri("/Ressource/fourmi.png", UriKind.Relative));
                     foreach (Model.Fourmi fourmi in refCase.Fourmis)
                     {
@@ -94,10 +89,19 @@ namespace FourmiliereSolution
                             break;
                         }
                     }
-                    Plateau.Children.Add(img);
-                    Grid.SetColumn(img, refCase.CordX);
-                    Grid.SetRow(img, refCase.CordY);
                 }
+                if (refCase.PheromoneMaison > 0)
+                {
+                    bck.Background = Brushes.LightGreen; 
+                }
+                if (refCase.PheromoneNourriture > 0)
+                {
+                    bck.Background = Brushes.LightSalmon;
+                }
+                bck.Child = img;
+                Plateau.Children.Add(bck);
+                Grid.SetColumn(bck, refCase.CordX);
+                Grid.SetRow(bck, refCase.CordY);
             }
         }
 

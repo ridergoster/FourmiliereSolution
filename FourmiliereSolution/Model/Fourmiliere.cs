@@ -49,18 +49,10 @@ namespace FourmiliereSolution.Model
         private void AjouterFourmis()
         {
             if (NombreNourritures > 0)
-            {
-                for (int i = 0; i <= 4 ; i++)
-                {
-                    RefCase.AjouterEnAjoutFourmi(new Fourmi(RefCase));
-                }
-                SupprimerNourriture();
-            }
-            else
-            {
-                if (NombreTours % 10 == 0)
-                    RefCase.AjouterEnAjoutFourmi(new Fourmi(RefCase));
-            }
+                RefCase.AjouterEnAjoutFourmi(new Fourmi(RefCase));
+            if (NombreTours % 10 == 0)
+                RefCase.AjouterEnAjoutFourmi(new Fourmi(RefCase));
+            SupprimerNourriture();
         }
     }
 }
